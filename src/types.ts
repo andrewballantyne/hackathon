@@ -8,24 +8,25 @@ export type GridItem = {
 };
 
 export type CardEditProps<D = {}> = {
-  settings: D;
+  data: D;
   onChange: (key: string, value: any) => void;
 };
 
-export type CardDefinition<D = {}> = {
+export type CardDefinition<D = any> = {
   id: string;
-  editComponent: Promise<{ default: React.ComponentType<CardEditProps<D>> }>;
-  contentComponent: Promise<{ default: React.ComponentType<D> }>;
+  editComponent: () => Promise<{ default: React.ComponentType<CardEditProps<D>> }>;
+  contentComponent: () => Promise<{ default: React.ComponentType<D> }>;
 };
 
-export type CatalogDefinition = CardDefinition & {
+export type CatalogCardDefinition<D = {}> = CardDefinition<D> & {
   label: string;
   description: string;
   icon: string;
   images: string[];
 };
 
-export type CardConfig<D = {}> = {
+export type CardConfig<D = any> = {
+  id: string;
   // the corresponding card ID of a CardDefinition
   type: string;
   label: string;
@@ -36,8 +37,9 @@ export type CardConfig<D = {}> = {
 };
 
 export type DashboardConfig = {
+  id: string;
   label: string;
-  widgets: CardConfig[];
+  cards: CardConfig[];
   // defaults to 12
   cols?: number;
   readOnly?: boolean;
