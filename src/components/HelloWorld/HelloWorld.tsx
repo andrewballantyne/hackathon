@@ -3,7 +3,7 @@ type HelloWorldProps = {
   count: number;
 };
 
-const HelloWorld: React.FC<HelloWorldProps> = ({ count }) => (
+const HelloWorld: React.FC<HelloWorldProps> = ({ count= 0 }) => (
   <span>{`Hello World! (${count})`}</span>
 );
 
