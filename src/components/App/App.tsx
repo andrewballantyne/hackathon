@@ -1,25 +1,25 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import { AppContainer, AppLink, Header, Logo } from './styles';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <AppContainer bg="green">
+      <Header>
+        <Logo src={logo} alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <a
-          className="App-link"
+        <AppLink
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
+          color="green"
         >
           Learn React
-        </a>
-      </header>
-    </div>
+        </AppLink>
+      </Header>
+    </AppContainer>
   );
 }
 
