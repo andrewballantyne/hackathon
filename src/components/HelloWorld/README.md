@@ -1,5 +1,5 @@
 HelloWorld example:
 
 ```js
-<HelloWorld />
+<HelloWorld count={2} />
 ```
