@@ -13,6 +13,7 @@ type Props = {
   padding?: number;
   gap?: number;
   onLayoutChange?: (layout: Layout[]) => void;
+  readonly?: boolean;
 };
 
 const DashboardGrid: React.FC<Props> = ({
@@ -20,6 +21,7 @@ const DashboardGrid: React.FC<Props> = ({
   children,
   layout,
   onLayoutChange,
+  readonly,
   padding = 24,
   gap = 16,
 }) => (
@@ -38,6 +40,8 @@ const DashboardGrid: React.FC<Props> = ({
     cols={cols ?? 12}
     containerPadding={[padding, padding]}
     margin={[gap, gap]}
+    isDraggable={!readonly}
+    isResizable={!readonly}
   >
     {children}
   </GridLayoutWithWidth>

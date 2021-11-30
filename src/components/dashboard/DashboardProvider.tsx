@@ -39,6 +39,8 @@ type Props = {
   };
 
   cardDefinitions: CardDefinition[];
+
+  readonly?: boolean;
 };
 
 const DashboardProvider: React.FC<Props> = ({
@@ -50,6 +52,7 @@ const DashboardProvider: React.FC<Props> = ({
   cardDefinitions,
   enableRouter,
   onLayoutChange,
+  readonly,
 }) => {
   const [activeTab, setActiveTab] = React.useState<string | undefined>(
     selectedTab ?? defaultSelectedTab ?? dashboards[0]?.id ?? undefined,
@@ -89,13 +92,14 @@ const DashboardProvider: React.FC<Props> = ({
           >
             {selected === dashboard.id ? (
               <DashboardGrid
+                readonly={readonly}
                 cols={dashboard.cols}
                 layout={dashboard.layout}
                 onLayoutChange={(layout) => onLayoutChange && onLayoutChange(dashboard.id, layout)}
               >
                 {dashboard.cards.map((card) => (
                   <div key={card.id}>
-                    <React.Suspense fallback={<div>Loading...</div>}>
+                    <React.Suspense fallback={null}>
                       <DashboardCardLoader config={card}>
                         {(Component) => (
                           <DashboardCardFrame config={card}>

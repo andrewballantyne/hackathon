@@ -6,7 +6,6 @@ import './Dashboard.scss';
 
 type Props = {
   cardDefinitions: CardDefinition[];
-  readonly?: boolean;
 };
 
 const Dashboard: React.FC<Props> = ({ cardDefinitions, children }) => {
