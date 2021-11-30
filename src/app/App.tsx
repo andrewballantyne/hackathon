@@ -17,9 +17,12 @@ import BarsIcon from '@patternfly/react-icons/dist/esm/icons/bars-icon';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import DashboardProvider from '../components/dashboard/DashboardProvider';
 import { cardDefinitions, dashboards } from '../components/dashboard/dashboard.test';
+import { DashboardConfig } from '../types';
 
 const App: React.FC = () => {
   const [isNavOpen, setNavOpen] = React.useState(true);
+
+  const [config, setConfig] = React.useState(dashboards);
 
   const headerToolbar = (
     <Toolbar id="toolbar">
@@ -55,7 +58,25 @@ const App: React.FC = () => {
             path="/*"
             element={
               <PageSection variant={PageSectionVariants.default} style={{ padding: 0 }}>
-                <DashboardProvider cardDefinitions={cardDefinitions} dashboards={dashboards} />
+                <DashboardProvider
+                  cardDefinitions={cardDefinitions}
+                  dashboards={config}
+                  onLayoutChange={(id, layout) => {
+                    setConfig((c) =>
+                      c.reduce((acc, d) => {
+                        if (d.id === id) {
+                          acc.push({
+                            ...d,
+                            layout,
+                          });
+                        } else {
+                          acc.push(d);
+                        }
+                        return acc;
+                      }, [] as DashboardConfig[]),
+                    );
+                  }}
+                />
               </PageSection>
             }
           />

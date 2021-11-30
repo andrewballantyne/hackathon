@@ -8,10 +8,13 @@ export const dashboards: DashboardConfig[] = [
   {
     id: 'overviewTab',
     label: 'Overview',
+    layout: [
+      { i: 'metrics', x: 0, y: 0, w: 4, h: 3 },
+      { i: 'quota', x: 4, y: 0, w: 4, h: 2 },
+    ],
     cards: [
       {
         id: 'metrics',
-        gridItem: { x: 0, y: 0, w: 4, h: 3 },
         type: 'core.markdown',
         data: {
           label: 'Metrics',
@@ -22,7 +25,6 @@ export const dashboards: DashboardConfig[] = [
 
       {
         id: 'quota',
-        gridItem: { x: 4, y: 0, w: 4, h: 2 },
         type: 'core.markdown',
         data: {
           label: 'Quota',
@@ -35,10 +37,14 @@ export const dashboards: DashboardConfig[] = [
   {
     id: 'teamTab',
     label: 'Team',
+    layout: [
+      { i: 'team', x: 0, y: 0, w: 4, h: 3 },
+      { i: 'process', x: 4, y: 0, w: 4, h: 2 },
+      { i: 'changeLog', x: 8, y: 0, w: 4, h: 1 },
+    ],
     cards: [
       {
         id: 'team',
-        gridItem: { x: 0, y: 0, w: 4, h: 3 },
         type: 'core.markdown',
         data: {
           label: 'Team Event',
@@ -49,7 +55,6 @@ export const dashboards: DashboardConfig[] = [
 
       {
         id: 'process',
-        gridItem: { x: 4, y: 0, w: 4, h: 2 },
         type: 'core.markdown',
         data: {
           label: 'Process',
@@ -60,7 +65,6 @@ export const dashboards: DashboardConfig[] = [
 
       {
         id: 'changeLog',
-        gridItem: { x: 8, y: 0, w: 4, h: 1 },
         type: 'core.markdown',
         data: {
           label: 'Change Log',

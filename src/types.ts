@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-export type GridItem = {
+export type Layout = {
+  i: string;
   x: number;
   y: number;
   w: number;
@@ -30,7 +31,6 @@ export type CardConfig<D = any> = {
   // the corresponding card ID of a CardDefinition
   type: string;
   frameless?: boolean;
-  gridItem: GridItem;
   data: D;
 };
 
@@ -38,6 +38,7 @@ export type DashboardConfig = {
   id: string;
   label: string;
   cards: CardConfig[];
+  layout: Layout[];
   // defaults to 12
   cols?: number;
   readOnly?: boolean;

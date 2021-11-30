@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CardDefinition, DashboardConfig, CardConfig } from '../../types';
+import { CardDefinition, DashboardConfig, Layout } from '../../types';
 import DashboardTabs from './DashboardTabs';
 import Dashboard from './Dashboard';
 import DashboardTab from './DashboardTab';
@@ -9,8 +9,7 @@ import DashboardGrid from './DashboardGrid';
 import { DashboardCardFrame } from '../card-structure';
 
 type Props = {
-  onDashboardChange?: (dashboard: DashboardConfig) => void;
-  onCardChange?: (dashboard: DashboardConfig, card: CardConfig) => void;
+  onLayoutChange?: (dashboardId: string, layout: Layout[]) => void;
 
   dashboards: DashboardConfig[];
 
@@ -43,8 +42,6 @@ type Props = {
 };
 
 const DashboardProvider: React.FC<Props> = ({
-  //   onDashboardChange,
-  //   onCardChange,
   basePath = '/',
   selectedTab,
   defaultSelectedTab,
@@ -52,6 +49,7 @@ const DashboardProvider: React.FC<Props> = ({
   dashboards,
   cardDefinitions,
   enableRouter,
+  onLayoutChange,
 }) => {
   const [activeTab, setActiveTab] = React.useState<string | undefined>(
     selectedTab ?? defaultSelectedTab ?? dashboards[0]?.id ?? undefined,
@@ -90,9 +88,13 @@ const DashboardProvider: React.FC<Props> = ({
             basePath={enableRouter ? basePath : undefined}
           >
             {selected === dashboard.id ? (
-              <DashboardGrid cols={dashboard.cols}>
+              <DashboardGrid
+                cols={dashboard.cols}
+                layout={dashboard.layout}
+                onLayoutChange={(layout) => onLayoutChange && onLayoutChange(dashboard.id, layout)}
+              >
                 {dashboard.cards.map((card) => (
-                  <div key={card.id} data-grid={card.gridItem} className="bender-grid-item">
+                  <div key={card.id} className="bender-grid-item">
                     <React.Suspense fallback={<div>Loading...</div>}>
                       <DashboardCardLoader config={card}>
                         {(Component) => (
