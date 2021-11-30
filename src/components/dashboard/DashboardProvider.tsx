@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { DashboardConfig, CardConfig } from '../../types';
+import { CardDefinition, DashboardConfig, CardConfig } from '../../types';
 import DashboardTabs from './DashboardTabs';
 import Dashboard from './Dashboard';
 import DashboardTab from './DashboardTab';
 import DashboardRouter from './DashboardRouter';
 import DashboardCardLoader from './DashboardCardLoader';
 import DashboardGrid from './DashboardGrid';
-import { CardDefinition } from '../../types';
-import DashboardCard from './DashboardCard';
+import { DashboardCardFrame } from '../card-structure';
 
 type Props = {
   onDashboardChange?: (dashboard: DashboardConfig) => void;
@@ -97,9 +96,9 @@ const DashboardProvider: React.FC<Props> = ({
                     <React.Suspense fallback={<div>Loading...</div>}>
                       <DashboardCardLoader config={card}>
                         {(Component) => (
-                          <DashboardCard config={card}>
+                          <DashboardCardFrame config={card}>
                             <Component {...card.data} />{' '}
-                          </DashboardCard>
+                          </DashboardCardFrame>
                         )}
                       </DashboardCardLoader>
                     </React.Suspense>

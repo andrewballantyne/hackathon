@@ -5,6 +5,6 @@ type Props = {
   config: CardConfig;
   children: React.ReactNode;
 };
-const DashboardCard: React.FC<Props> = ({ config, children }) => <>{children}</>;
+const DashboardCardFrame: React.FC<Props> = ({ config, children }) => <>{children}</>;
 
-export default DashboardCard;
+export default DashboardCardFrame;
