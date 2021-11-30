@@ -29,9 +29,7 @@ export type CardConfig<D = any> = {
   id: string;
   // the corresponding card ID of a CardDefinition
   type: string;
-  label: string;
-  description?: string;
-  color?: string | 'transparent';
+  frameless?: boolean;
   gridItem: GridItem;
   data: D;
 };
