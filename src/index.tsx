@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { DashboardApp as App } from './components/Dashboard/DashboardApp';
+import { DashboardApp as App } from './components/dashboard/DashboardApp';
 import reportWebVitals from './reportWebVitals';
 
 import './index.scss';
