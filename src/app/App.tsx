@@ -17,7 +17,7 @@ import {
 import BarsIcon from '@patternfly/react-icons/dist/esm/icons/bars-icon';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import DashboardProvider from '../components/dashboard/DashboardProvider';
-import { cardDefinitions, dashboards } from '../components/dashboard/dashboard.test';
+import { cardDefinitions, dashboards } from '../test/dashboard.test';
 import { DashboardConfig } from '../types';
 import Catalog from '../components/catalog/Catalog';
 import { Pages } from './const';

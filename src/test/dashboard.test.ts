@@ -1,6 +1,6 @@
-import { DashboardConfig } from '../../types';
+import { DashboardConfig } from '../types';
 
-import definitions from './cards/definitions';
+import definitions from '../components/cards/definitions';
 
 export const cardDefinitions = [...definitions];
 
@@ -16,6 +16,7 @@ export const dashboards: DashboardConfig[] = [
       {
         id: 'metrics',
         type: 'core.markdown',
+        frameless: true,
         data: {
           label: 'Metrics',
           description: 'See metrics',

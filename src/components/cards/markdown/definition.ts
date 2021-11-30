@@ -1,5 +1,5 @@
 import { MarkdownCardData } from './types';
-import { CatalogCardDefinition } from '../../../../types';
+import { CatalogCardDefinition } from '../../../types';
 
 const definition: CatalogCardDefinition<MarkdownCardData> = {
   id: 'core.markdown',

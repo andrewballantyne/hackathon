@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CardEditProps } from '../../../../types';
+import { CardEditProps } from '../../../types';
 import { MarkdownCardData } from './types';
 
 const MarkdownCardEdit: React.FC<CardEditProps<MarkdownCardData>> = ({
