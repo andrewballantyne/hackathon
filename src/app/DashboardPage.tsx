@@ -1,4 +1,5 @@
 import {
+  Button,
   Stack,
   StackItem,
   Switch,
@@ -8,7 +9,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import React from 'react';
-import DashboardProvider from '../components/dashboard/DashboardProvider';
+import DashboardProvider, { DashboardProviderAPI } from '../components/dashboard/DashboardProvider';
 import { cardDefinitions, dashboards } from '../test/dashboard.test';
 import { DashboardConfig } from '../types';
 
@@ -16,12 +17,19 @@ const DashboardPage: React.FC = () => {
   const [config, setConfig] = React.useState(dashboards);
   const [readonly, setReadonly] = React.useState(false);
 
+  const dashboardProviderAPI = React.useRef<DashboardProviderAPI>(null);
+
   return (
     <Stack style={{ flexGrow: 1 }}>
       <StackItem>
         <Toolbar>
           <ToolbarContent>
             <ToolbarGroup alignment={{ default: 'alignRight' }}>
+              <ToolbarItem>
+                <Button onClick={() => dashboardProviderAPI.current?.fullscreenToggle()}>
+                  Fullscreen
+                </Button>
+              </ToolbarItem>
               <ToolbarItem>
                 <Switch
                   label="Readonly"
@@ -35,6 +43,7 @@ const DashboardPage: React.FC = () => {
       </StackItem>
       <StackItem isFilled style={{ display: 'flex', overflow: 'hidden' }}>
         <DashboardProvider
+          ref={dashboardProviderAPI}
           readonly={readonly}
           cardDefinitions={cardDefinitions}
           dashboards={config}

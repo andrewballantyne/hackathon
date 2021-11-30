@@ -3,12 +3,27 @@ import { CardDefinition } from '../../types';
 import DashboardContext from './DashboardContext';
 
 import './Dashboard.scss';
+import { useFullscreen } from '../../utils/fullscreen';
+
+export type DashboardAPI = {
+  fullscreenToggle(): void;
+};
 
 type Props = {
   cardDefinitions: CardDefinition[];
+  children: React.ReactNode;
 };
 
-const Dashboard: React.FC<Props> = ({ cardDefinitions, children }) => {
+const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
+  { cardDefinitions, children },
+  ref,
+) => {
+  const [isFullscreen, fullscreenRef, fullscreenToggle] = useFullscreen<HTMLDivElement>();
+
+  React.useImperativeHandle(ref, () => ({
+    fullscreenToggle,
+  }));
+
   const idToCardDefinition = React.useMemo(
     () =>
       cardDefinitions.reduce(
@@ -17,13 +32,14 @@ const Dashboard: React.FC<Props> = ({ cardDefinitions, children }) => {
       ),
     [cardDefinitions],
   );
+
   return (
-    <div className="pf-dashboard">
-      <DashboardContext.Provider value={{ idToCardDefinition }}>
+    <div className="pf-dashboard" ref={fullscreenRef}>
+      <DashboardContext.Provider value={{ idToCardDefinition, isFullscreen }}>
         {children}
       </DashboardContext.Provider>
     </div>
   );
 };
 
-export default Dashboard;
+export default React.forwardRef(Dashboard);
