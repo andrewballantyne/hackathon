@@ -8,19 +8,10 @@
   flex-direction: column;
 }
 
-.bender-dashboard > .pf-c-tabs {
-  flex-shrink: 0;
-}
-
 .bender-dashboard > .pf-c-tab-content {
   flex: 1 1 0;
-  background-color: rgb(240, 240, 240);
-  overflow: hidden;
-}
-
-.bender-grid-item .co-dashboard-card {
-  height: 100%;
-  overflow: hidden;
+  background-color: var(--pf-global--Color--light-200);
+  overflow: auto;
 }
 
 .bender-dashboard .pf-c-card {

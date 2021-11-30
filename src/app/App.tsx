@@ -5,8 +5,6 @@ import {
   MastheadMain,
   MastheadToggle,
   Page,
-  PageSection,
-  PageSectionVariants,
   PageSidebar,
   PageToggleButton,
   Toolbar,
@@ -57,27 +55,25 @@ const App: React.FC = () => {
           <Route
             path="/*"
             element={
-              <PageSection variant={PageSectionVariants.default} style={{ padding: 0 }}>
-                <DashboardProvider
-                  cardDefinitions={cardDefinitions}
-                  dashboards={config}
-                  onLayoutChange={(id, layout) => {
-                    setConfig((c) =>
-                      c.reduce((acc, d) => {
-                        if (d.id === id) {
-                          acc.push({
-                            ...d,
-                            layout,
-                          });
-                        } else {
-                          acc.push(d);
-                        }
-                        return acc;
-                      }, [] as DashboardConfig[]),
-                    );
-                  }}
-                />
-              </PageSection>
+              <DashboardProvider
+                cardDefinitions={cardDefinitions}
+                dashboards={config}
+                onLayoutChange={(id, layout) => {
+                  setConfig((c) =>
+                    c.reduce((acc, d) => {
+                      if (d.id === id) {
+                        acc.push({
+                          ...d,
+                          layout,
+                        });
+                      } else {
+                        acc.push(d);
+                      }
+                      return acc;
+                    }, [] as DashboardConfig[]),
+                  );
+                }}
+              />
             }
           />
         </Routes>

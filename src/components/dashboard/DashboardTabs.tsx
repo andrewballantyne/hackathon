@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Tabs } from '@patternfly/react-core';
 
+import './DashboardTabs.scss';
+
 type Props = {
   children?: React.ReactNode;
 
@@ -33,7 +35,12 @@ const DashboardTabs: React.FC<Props> = ({ children, selected, onChange, defaultS
     return selected ?? activeKeyState;
   }, [selected, activeKeyState]);
   return (
-    <Tabs unmountOnExit activeKey={activeKey} onSelect={setActiveKeyCb}>
+    <Tabs
+      unmountOnExit
+      activeKey={activeKey}
+      onSelect={setActiveKeyCb}
+      className="bender-dashboard-tabs"
+    >
       {children}
     </Tabs>
   );

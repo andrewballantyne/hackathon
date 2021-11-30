@@ -2,7 +2,7 @@ import * as React from 'react';
 import { CardDefinition } from '../../types';
 import DashboardContext from './DashboardContext';
 
-import './Dashboard.css';
+import './Dashboard.scss';
 
 type Props = {
   cardDefinitions: CardDefinition[];
