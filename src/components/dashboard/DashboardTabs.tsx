@@ -39,7 +39,7 @@ const DashboardTabs: React.FC<Props> = ({ children, selected, onChange, defaultS
       unmountOnExit
       activeKey={activeKey}
       onSelect={setActiveKeyCb}
-      className="bender-dashboard-tabs"
+      className="pf-dashboard-tabs"
     >
       {children}
     </Tabs>

@@ -6,6 +6,7 @@ import './Dashboard.scss';
 
 type Props = {
   cardDefinitions: CardDefinition[];
+  readonly?: boolean;
 };
 
 const Dashboard: React.FC<Props> = ({ cardDefinitions, children }) => {
@@ -18,7 +19,7 @@ const Dashboard: React.FC<Props> = ({ cardDefinitions, children }) => {
     [cardDefinitions],
   );
   return (
-    <div className="bender-dashboard">
+    <div className="pf-dashboard">
       <DashboardContext.Provider value={{ idToCardDefinition }}>
         {children}
       </DashboardContext.Provider>
