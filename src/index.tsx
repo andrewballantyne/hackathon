@@ -1,6 +1,8 @@
+import '@patternfly/react-core/dist/styles/base.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { DashboardApp as App } from './components/dashboard/DashboardApp';
+import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 
 import './index.scss';
