@@ -94,7 +94,7 @@ const DashboardProvider: React.FC<Props> = ({
                 onLayoutChange={(layout) => onLayoutChange && onLayoutChange(dashboard.id, layout)}
               >
                 {dashboard.cards.map((card) => (
-                  <div key={card.id} className="bender-grid-item">
+                  <div key={card.id}>
                     <React.Suspense fallback={<div>Loading...</div>}>
                       <DashboardCardLoader config={card}>
                         {(Component) => (
