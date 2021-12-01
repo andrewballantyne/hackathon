@@ -18,9 +18,9 @@ export const dashboards: DashboardConfig[] = [
         type: 'core.markdown',
         frameless: true,
         data: {
-          label: 'Metrics',
+          title: 'Metrics',
           description: 'See metrics',
-          markdown: '## Metrics',
+          markdown: '## Metrics markdown',
         },
       },
 
@@ -28,9 +28,9 @@ export const dashboards: DashboardConfig[] = [
         id: 'quota',
         type: 'core.markdown',
         data: {
-          label: 'Quota',
+          title: 'Quota',
           description: 'Resource quotas',
-          markdown: '## Quota',
+          markdown: '## Quota markdown',
         },
       },
     ],
@@ -48,9 +48,9 @@ export const dashboards: DashboardConfig[] = [
         id: 'team',
         type: 'core.markdown',
         data: {
-          label: 'Team Event',
+          title: 'Team Event',
           description: 'Get the latest team event information',
-          markdown: '## Testing 1 2 3 ...',
+          markdown: '## Team event markdown',
         },
       },
 
@@ -58,9 +58,9 @@ export const dashboards: DashboardConfig[] = [
         id: 'process',
         type: 'core.markdown',
         data: {
-          label: 'Process',
+          title: 'Process',
           description: 'Read about the business process.',
-          markdown: '## Process documentation',
+          markdown: '## Process documentation markdown',
         },
       },
 
@@ -68,9 +68,9 @@ export const dashboards: DashboardConfig[] = [
         id: 'changeLog',
         type: 'core.markdown',
         data: {
-          label: 'Change Log',
+          title: 'Change Log',
           description: 'Read the change log for each release',
-          markdown: '## Change Log',
+          markdown: '## Change Log markdown',
         },
       },
     ],

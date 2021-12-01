@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CardDefinition, DashboardConfig, Layout } from '../../types';
+import { CardConfig, CardDefinition, DashboardConfig, Layout } from '../../types';
 import DashboardTabs from './DashboardTabs';
 import Dashboard, { DashboardAPI } from './Dashboard';
 import DashboardTab from './DashboardTab';
@@ -44,6 +44,10 @@ type Props = {
 
   readonly?: boolean;
 };
+
+const MemoCardContent: React.FC<{ data: any; Component: React.ComponentType }> = React.memo(
+  ({ data, Component }) => <Component {...data} />,
+);
 
 const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Props> = (
   {
@@ -114,7 +118,7 @@ const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Pr
                       <DashboardCardLoader config={card}>
                         {(Component) => (
                           <DashboardCardFrame config={card}>
-                            <Component {...card.data} />{' '}
+                            <MemoCardContent data={card.data} Component={Component} />
                           </DashboardCardFrame>
                         )}
                       </DashboardCardLoader>
