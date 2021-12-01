@@ -17,6 +17,11 @@ import CatalogSelectedSidebarContent from './CatalogSelectedSidebarContent';
 
 import './Catalog.scss';
 
+const MAX_WIDTHS = {
+  default: '300px',
+};
+const MIN_WIDTHS = MAX_WIDTHS;
+
 type CatalogProps = {};
 
 const Catalog: React.FC<CatalogProps> = (props) => {
@@ -45,9 +50,9 @@ const Catalog: React.FC<CatalogProps> = (props) => {
       >
         <DrawerContentBody className="catalog__content-body">
           <PageSection onClick={() => setSelectedId('')}>
-            <Gallery hasGutter>
+            <Gallery hasGutter maxWidths={MAX_WIDTHS} minWidths={MIN_WIDTHS}>
               {cardDefinitions.map((cardDefinition) => (
-                <GalleryItem key={cardDefinition.id}>
+                <GalleryItem key={cardDefinition.id} className="catalog__gallery-item">
                   <CatalogCard
                     cardDefinition={cardDefinition}
                     onSelect={(e) => {
