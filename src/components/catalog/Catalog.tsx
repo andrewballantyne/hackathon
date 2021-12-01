@@ -47,14 +47,15 @@ const Catalog: React.FC<CatalogProps> = (props) => {
           <PageSection onClick={() => setSelectedId('')}>
             <Gallery hasGutter>
               <GalleryItem>
-                {cardDefinitions.map(({ id }) => (
+                {cardDefinitions.map((cardDefinition) => (
                   <CatalogCard
-                    key={id}
+                    key={cardDefinition.id}
+                    cardDefinition={cardDefinition}
                     onSelect={(e) => {
                       e.stopPropagation();
-                      setSelectedId(id);
+                      setSelectedId(cardDefinition.id);
                     }}
-                    isSelected={selectedId === id}
+                    isSelected={selectedId === cardDefinition.id}
                   />
                 ))}
               </GalleryItem>

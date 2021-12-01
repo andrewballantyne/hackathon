@@ -19,7 +19,7 @@ const CatalogSelectedSidebarContent: React.FC<CatalogSelectedSidebarContentProps
     <Stack hasGutter>
       <StackItem>
         <Title headingLevel="h2" size={TitleSizes['3xl']}>
-          {icon && <CatalogIcon icon={icon} />}
+          <CatalogIcon icon={icon} />
           {label}
         </Title>
       </StackItem>
