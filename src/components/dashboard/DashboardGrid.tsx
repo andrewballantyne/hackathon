@@ -41,6 +41,7 @@ const DashboardGrid: React.FC<Props> = ({
   // the Grid doesn't re-render correctly to become editable again
   return (
     <GridLayoutWithWidth
+      measureBeforeMount
       layout={layout}
       onDragStart={
         onDragStart
