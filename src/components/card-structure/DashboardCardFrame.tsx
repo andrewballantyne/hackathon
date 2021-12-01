@@ -8,7 +8,7 @@ type Props = {
 };
 
 const DashboardCardFrame: React.FC<Props> = ({ config, children }) => (
-  <Card isFullHeight isPlain={config.frameless}>
+  <Card isFullHeight isPlain={config.frameless} style={{ overflow: 'hidden' }}>
     {children}
   </Card>
 );

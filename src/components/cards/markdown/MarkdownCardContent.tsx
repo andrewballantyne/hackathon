@@ -12,7 +12,7 @@ const converter = new Converter({
 const MarkdownCardContent: React.FC<MarkdownCardData> = ({ title, description, markdown }) => (
   <DashboardCardContent>
     <DashboardCardTitle title={description}>{title}</DashboardCardTitle>
-    <DashboardCardBody>
+    <DashboardCardBody style={{ overflow: 'auto' }}>
       <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(markdown) }} />
     </DashboardCardBody>
   </DashboardCardContent>
