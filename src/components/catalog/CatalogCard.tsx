@@ -58,19 +58,19 @@ const CatalogCard: React.FC<CatalogCardProps> = ({ cardDefinition, isSelected, o
           </Button>
         </CardActions>
       </CardHeader>
-      <CardBody>
-        {hasImages ? (
-          <CatalogImageDeck images={images} />
-        ) : (
-          <Bullseye>
+      <CardBody className="catalog-card__card-body">
+        <Bullseye>
+          {hasImages ? (
+            <CatalogImageDeck images={images} />
+          ) : (
             <EmptyState variant={EmptyStateVariant.xs}>
               <EmptyStateIcon icon={OutlinedFileImage} />
               <Title headingLevel="h2" size="md">
                 No preview images available
               </Title>
             </EmptyState>
-          </Bullseye>
-        )}
+          )}
+        </Bullseye>
       </CardBody>
     </Card>
   );

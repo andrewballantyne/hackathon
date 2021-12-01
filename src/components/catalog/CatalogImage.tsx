@@ -1,12 +1,33 @@
 import * as React from 'react';
+import { Bullseye, Button, Modal, ModalVariant } from '@patternfly/react-core';
 import { CatalogCardDefinition } from '../../types';
+
+import './CatalogImage.scss';
 
 type CatalogImageProps = {
   src: CatalogCardDefinition['images'][0];
 };
 
 const CatalogImage: React.FC<CatalogImageProps> = ({ src }) => {
-  return <img src={src} alt="catalog example" />;
+  const [isPreviewOpen, setPreviewOpen] = React.useState(false);
+
+  return (
+    <>
+      <Button variant="link" onClick={() => setPreviewOpen(true)}>
+        <img src={src} alt="catalog example" className="catalog-image" />
+      </Button>
+      <Modal
+        variant={ModalVariant.medium}
+        title="Preview"
+        isOpen={isPreviewOpen}
+        onClose={() => setPreviewOpen(false)}
+      >
+        <Bullseye>
+          <img src={src} alt="catalog example preview" />
+        </Bullseye>
+      </Modal>
+    </>
+  );
 };
 
 export default CatalogImage;

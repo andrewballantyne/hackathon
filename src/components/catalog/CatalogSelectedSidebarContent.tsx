@@ -15,6 +15,8 @@ const CatalogSelectedSidebarContent: React.FC<CatalogSelectedSidebarContentProps
 
   const { label, description, icon, images } = selectedDefinition;
 
+  const validImages = images.filter((src) => !!src);
+
   return (
     <Stack hasGutter>
       <StackItem>
@@ -26,15 +28,20 @@ const CatalogSelectedSidebarContent: React.FC<CatalogSelectedSidebarContentProps
       <StackItem>
         <p>{description}</p>
       </StackItem>
-      {images
-        .filter((src) => !!src)
-        .map((src) => (
-          <StackItem key={src}>
-            {images.map((image) => (
-              <CatalogImage src={image} />
+      {validImages.length > 0 && (
+        <StackItem>
+          <Stack hasGutter>
+            <StackItem>
+              <Title headingLevel="h3">Preview Images</Title>
+            </StackItem>
+            {validImages.map((src) => (
+              <StackItem key={src}>
+                <CatalogImage src={src} />
+              </StackItem>
             ))}
-          </StackItem>
-        ))}
+          </Stack>
+        </StackItem>
+      )}
     </Stack>
   );
 };
