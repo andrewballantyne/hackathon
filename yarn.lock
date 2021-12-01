@@ -1533,6 +1533,20 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
+"@patternfly/patternfly@4.159.1":
+  version "4.159.1"
+  resolved "https://registry.yarnpkg.com/@patternfly/patternfly/-/patternfly-4.159.1.tgz#36a0dc7c31bd17acc64db5777dca33a541ffec73"
+  integrity sha512-CPLE7yAmtETH8TAdQhHkyFmyvjGwsv/7PeR4k57DY9X4IHpx41m4SXrv9cBCr/+Uy8o2SjvE8dtlZb+h0rLByQ==
+
+"@patternfly/react-catalog-view-extension@^4.26.4":
+  version "4.26.4"
+  resolved "https://registry.yarnpkg.com/@patternfly/react-catalog-view-extension/-/react-catalog-view-extension-4.26.4.tgz#7ad58f48ccf2dea9bfbd9cb323a0e83150989dbb"
+  integrity sha512-Xo8eTF3wDjhPmP7nwNbl+ZoItO+f/gKPIuH9Rfa8M+vZWZV5iuMlLqoirTCWMgV7ENA6YH9qu8VN+PNtJ9Qh/A==
+  dependencies:
+    "@patternfly/patternfly" "4.159.1"
+    "@patternfly/react-core" "^4.175.4"
+    "@patternfly/react-styles" "^4.25.4"
+
 "@patternfly/react-core@^4.175.4":
   version "4.175.4"
   resolved "https://registry.yarnpkg.com/@patternfly/react-core/-/react-core-4.175.4.tgz#1dae2a6b5eb58209a47bdc3bf457c47b68ccee54"

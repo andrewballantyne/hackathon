@@ -1,4 +1,4 @@
-import '@patternfly/react-core/dist/styles/base.css';
+import './external.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
