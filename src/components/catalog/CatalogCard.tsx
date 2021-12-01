@@ -41,8 +41,7 @@ const CatalogCard: React.FC<CatalogCardProps> = ({ cardDefinition, isSelected, o
     >
       <CardHeader>
         <CardHeaderMain>
-          <CatalogIcon icon={icon} />
-          {label}
+          <CatalogIcon icon={icon} /> {label}
         </CardHeaderMain>
         <CardActions>
           <Button

@@ -28,7 +28,7 @@ export type CardDefinition<D = any> = {
 export type CatalogCardDefinition<D = {}> = CardDefinition<D> & {
   label: string;
   description: string;
-  icon: string;
+  icon: string | React.ReactElement;
   images: string[];
 };
 
