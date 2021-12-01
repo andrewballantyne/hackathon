@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { CatalogCardDefinition } from '../../types';
-import { Title } from '@patternfly/react-core';
+import { Stack, StackItem, Title, TitleSizes } from '@patternfly/react-core';
+import CatalogImage from './CatalogImage';
+import CatalogIcon from './CatalogIcon';
 
 type CatalogSelectedSidebarContentProps = {
   selectedDefinition?: CatalogCardDefinition;
@@ -11,13 +13,29 @@ const CatalogSelectedSidebarContent: React.FC<CatalogSelectedSidebarContentProps
 }) => {
   if (!selectedDefinition) return null;
 
-  const { label, description } = selectedDefinition;
+  const { label, description, icon, images } = selectedDefinition;
 
   return (
-    <>
-      <Title headingLevel="h2">{label}</Title>
-      <p>{description}</p>
-    </>
+    <Stack hasGutter>
+      <StackItem>
+        <Title headingLevel="h2" size={TitleSizes['3xl']}>
+          {icon && <CatalogIcon icon={icon} />}
+          {label}
+        </Title>
+      </StackItem>
+      <StackItem>
+        <p>{description}</p>
+      </StackItem>
+      {images
+        .filter((src) => !!src)
+        .map((src) => (
+          <StackItem key={src}>
+            {images.map((image) => (
+              <CatalogImage src={image} />
+            ))}
+          </StackItem>
+        ))}
+    </Stack>
   );
 };
 
