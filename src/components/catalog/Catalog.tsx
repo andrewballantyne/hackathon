@@ -46,10 +46,9 @@ const Catalog: React.FC<CatalogProps> = (props) => {
         <DrawerContentBody className="catalog__content-body">
           <PageSection onClick={() => setSelectedId('')}>
             <Gallery hasGutter>
-              <GalleryItem>
-                {cardDefinitions.map((cardDefinition) => (
+              {cardDefinitions.map((cardDefinition) => (
+                <GalleryItem key={cardDefinition.id}>
                   <CatalogCard
-                    key={cardDefinition.id}
                     cardDefinition={cardDefinition}
                     onSelect={(e) => {
                       e.stopPropagation();
@@ -57,8 +56,8 @@ const Catalog: React.FC<CatalogProps> = (props) => {
                     }}
                     isSelected={selectedId === cardDefinition.id}
                   />
-                ))}
-              </GalleryItem>
+                </GalleryItem>
+              ))}
             </Gallery>
           </PageSection>
         </DrawerContentBody>
