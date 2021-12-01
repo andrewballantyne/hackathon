@@ -8,8 +8,10 @@ const definition: CatalogCardDefinition<MarkdownCardData> = {
   description: 'Displays a custom markdown message.',
   icon: '',
   images: [quotaMarkdownCard, dashboardMarkdownCards],
-  editComponent: () => import('./MarkdownCardEdit'),
-  contentComponent: () => import('./MarkdownCardContent'),
+  settingsComponent: () =>
+    import('./MarkdownCardSettings' /* webpackChunkName: "pf-dashboard-card-markdown" */),
+  contentComponent: () =>
+    import('./MarkdownCardContent' /* webpackChunkName: "pf-dashboard-card-markdown" */),
 };
 
 export default definition;

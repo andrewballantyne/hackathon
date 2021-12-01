@@ -15,6 +15,10 @@ type Props = {
   gap?: number;
   onLayoutChange?: (layout: Layout[]) => void;
   readonly?: boolean;
+  onDragStart?: (id: string) => void;
+  onDragStop?: (id: string) => void;
+  onResizeStart?: (id: string) => void;
+  onResizeStop?: (id: string) => void;
 };
 
 const DashboardGrid: React.FC<Props> = ({
@@ -25,6 +29,10 @@ const DashboardGrid: React.FC<Props> = ({
   readonly,
   padding = 24,
   gap = 16,
+  onDragStart,
+  onDragStop,
+  onResizeStart,
+  onResizeStop,
 }) => {
   const { isFullscreen } = React.useContext(DashboardContext);
   const editable = !readonly && !isFullscreen;
@@ -34,15 +42,44 @@ const DashboardGrid: React.FC<Props> = ({
   return (
     <GridLayoutWithWidth
       layout={layout}
+      onDragStart={
+        onDragStart
+          ? (_, item) => {
+              onDragStart(item.i);
+            }
+          : undefined
+      }
+      onDragStop={
+        onDragStop
+          ? (_, item) => {
+              onDragStop(item.i);
+            }
+          : undefined
+      }
+      onResizeStart={
+        onResizeStart
+          ? (_, item) => {
+              onResizeStart(item.i);
+            }
+          : undefined
+      }
+      onResizeStop={
+        onResizeStop
+          ? (_, item) => {
+              onResizeStop(item.i);
+            }
+          : undefined
+      }
       onLayoutChange={
-        onLayoutChange &&
-        ((l) =>
-          onLayoutChange(
-            l.reduce((acc, { i, x, y, w, h }) => {
-              acc.push({ i, x, y, w, h });
-              return acc;
-            }, [] as Layout[]),
-          ))
+        onLayoutChange
+          ? (l) =>
+              onLayoutChange(
+                l.reduce((acc, { i, x, y, w, h }) => {
+                  acc.push({ i, x, y, w, h });
+                  return acc;
+                }, [] as Layout[]),
+              )
+          : undefined
       }
       cols={cols ?? 12}
       containerPadding={[padding, padding]}

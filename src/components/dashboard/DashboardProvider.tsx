@@ -64,6 +64,8 @@ const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Pr
   ref,
 ) => {
   const dashboardRef = React.useRef<DashboardAPI>(null);
+  const [dragId, setDragId] = React.useState<string | undefined>();
+  const [resizeId, setResizeId] = React.useState<string | undefined>();
 
   React.useImperativeHandle(ref, () => ({
     fullscreenToggle: () => dashboardRef.current?.fullscreenToggle(),
@@ -111,14 +113,22 @@ const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Pr
                 cols={dashboard.cols}
                 layout={dashboard.layout}
                 onLayoutChange={(layout) => onLayoutChange && onLayoutChange(dashboard.id, layout)}
+                onDragStart={(id) => setDragId(id)}
+                onDragStop={() => setDragId(undefined)}
+                onResizeStart={(id) => setResizeId(id)}
+                onResizeStop={() => setResizeId(undefined)}
               >
                 {dashboard.cards.map((card) => (
                   <div key={card.id}>
                     <React.Suspense fallback={null}>
                       <DashboardCardLoader config={card}>
                         {(Component) => (
-                          <DashboardCardFrame config={card}>
-                            <MemoCardContent data={card.data} Component={Component} />
+                          <DashboardCardFrame config={card} readonly={readonly}>
+                            <Component
+                              data={card.data}
+                              resizing={resizeId === card.id}
+                              dragging={dragId === card.id}
+                            />
                           </DashboardCardFrame>
                         )}
                       </DashboardCardLoader>

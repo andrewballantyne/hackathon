@@ -1,6 +1,7 @@
 import { CatalogCardDefinition } from '../../types';
-import { definition } from './markdown';
+import { iframeDefinition } from './iframe';
+import { markdownDefinition } from './markdown';
 
-const definitions: CatalogCardDefinition<any>[] = [definition];
+const definitions: CatalogCardDefinition<any>[] = [markdownDefinition, iframeDefinition];
 
 export default definitions;

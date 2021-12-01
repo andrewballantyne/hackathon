@@ -8,15 +8,21 @@ export type Layout = {
   h: number;
 };
 
-export type CardEditProps<D = {}> = {
+export type CardSettingsProps<D = {}> = {
   data: D;
-  onChange: (key: string, value: any) => void;
+  onChange: (data: any) => void;
+};
+
+export type CardProps<D = {}> = {
+  data: D;
+  dragging: boolean;
+  resizing: boolean;
 };
 
 export type CardDefinition<D = any> = {
   id: string;
-  editComponent: () => Promise<{ default: React.ComponentType<CardEditProps<D>> }>;
-  contentComponent: () => Promise<{ default: React.ComponentType<D> }>;
+  settingsComponent: () => Promise<{ default: React.ComponentType<CardSettingsProps<D>> }>;
+  contentComponent: () => Promise<{ default: React.ComponentType<CardProps<D>> }>;
 };
 
 export type CatalogCardDefinition<D = {}> = CardDefinition<D> & {

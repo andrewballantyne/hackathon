@@ -9,18 +9,16 @@ export const dashboards: DashboardConfig[] = [
     id: 'overviewTab',
     label: 'Overview',
     layout: [
-      { i: 'metrics', x: 0, y: 0, w: 4, h: 3 },
+      { i: 'redhat', x: 0, y: 0, w: 4, h: 3 },
       { i: 'quota', x: 4, y: 0, w: 4, h: 2 },
     ],
     cards: [
       {
-        id: 'metrics',
-        type: 'core.markdown',
-        frameless: true,
+        id: 'redhat',
+        type: 'core.iframe',
         data: {
-          title: 'Metrics',
-          description: 'See metrics',
-          markdown: '## Metrics markdown',
+          title: 'Red Hat',
+          url: 'https://www.redhat.com',
         },
       },
 
@@ -47,6 +45,7 @@ export const dashboards: DashboardConfig[] = [
       {
         id: 'team',
         type: 'core.markdown',
+        frameless: true,
         data: {
           title: 'Team Event',
           description: 'Get the latest team event information',

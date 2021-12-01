@@ -14,7 +14,7 @@ const DashboardCardLooader: React.FC<Props> = ({ config, children }) => {
     [config.type, idToCardDefinition],
   );
   // TODO error condition if loader == null
-  const Component = React.useMemo(() => React.lazy(loader), [loader]);
+  const Component = React.useMemo(() => React.memo(React.lazy(loader)), [loader]);
   return Component ? children(Component) : null;
 };
 
