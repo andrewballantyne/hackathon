@@ -4,7 +4,7 @@ import GridLayout, { WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { Layout } from '../../types';
-import DashboardContext from './DashboardContext';
+import DashboardContext from '../../utils/DashboardContext';
 
 const GridLayoutWithWidth = WidthProvider(GridLayout);
 

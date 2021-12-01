@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import DashboardProvider, { DashboardProviderAPI } from '../components/dashboard/DashboardProvider';
 import { cardDefinitions, dashboards } from '../test/dashboard.test';
-import { DashboardConfig } from '../types';
+import { CardConfig, DashboardConfig } from '../types';
 
 const DashboardPage: React.FC = () => {
   const [config, setConfig] = React.useState(dashboards);
@@ -47,6 +47,23 @@ const DashboardPage: React.FC = () => {
           readonly={readonly}
           cardDefinitions={cardDefinitions}
           dashboards={config}
+          onCardChange={(id, config) => {
+            setConfig((c) =>
+              c.reduce((acc, d) => {
+                if (d.id === id) {
+                  const i = d.cards.findIndex((c) => c.id === config.id);
+                  const cards = [...d.cards.slice(0, i), config, ...d.cards.slice(i + 1)];
+                  acc.push({
+                    ...d,
+                    cards,
+                  });
+                } else {
+                  acc.push(d);
+                }
+                return acc;
+              }, [] as DashboardConfig[]),
+            );
+          }}
           onLayoutChange={(id, layout) => {
             setConfig((c) =>
               c.reduce((acc, d) => {

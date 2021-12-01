@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CardDefinition } from '../../types';
+import { CardDefinition } from '../types';
 
 type ContextProps = {
   idToCardDefinition: { [id: string]: CardDefinition };

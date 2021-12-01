@@ -15,18 +15,18 @@ export type CardSettingsProps<D = {}> = {
 
 export type CardProps<D = {}> = {
   data: D;
-  dragging: boolean;
-  resizing: boolean;
+  dragging?: boolean;
+  resizing?: boolean;
 };
 
 export type CardDefinition<D = any> = {
+  label: string;
   id: string;
   settingsComponent: () => Promise<{ default: React.ComponentType<CardSettingsProps<D>> }>;
   contentComponent: () => Promise<{ default: React.ComponentType<CardProps<D>> }>;
 };
 
 export type CatalogCardDefinition<D = {}> = CardDefinition<D> & {
-  label: string;
   description: string;
   icon: string | React.ReactElement;
   images: string[];

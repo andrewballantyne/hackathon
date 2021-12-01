@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CardDefinition } from '../../types';
-import DashboardContext from './DashboardContext';
+import DashboardContext from '../../utils/DashboardContext';
 
 import './Dashboard.scss';
 import { useFullscreen } from '../../utils/fullscreen';

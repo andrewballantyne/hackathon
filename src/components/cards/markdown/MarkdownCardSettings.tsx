@@ -7,7 +7,7 @@ const MarkdownCardSettings: React.FC<CardSettingsProps<MarkdownCardData>> = ({
   onChange,
   data,
 }) => (
-  <Form isHorizontal>
+  <Form>
     <FormGroup label="Title" isRequired fieldId="markdown-card-title">
       <TextInput
         value={data.title}

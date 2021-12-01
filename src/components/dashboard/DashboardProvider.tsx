@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CardDefinition, DashboardConfig, Layout } from '../../types';
+import { CardConfig, CardDefinition, DashboardConfig, Layout } from '../../types';
 import DashboardTabs from './DashboardTabs';
 import Dashboard, { DashboardAPI } from './Dashboard';
 import DashboardTab from './DashboardTab';
@@ -7,10 +7,12 @@ import DashboardRouter from './DashboardRouter';
 import DashboardCardLoader from './DashboardCardLoader';
 import DashboardGrid from './DashboardGrid';
 import { DashboardCardFrame } from '../card-structure';
+import EditableWrapper from '../card-editor/EditableWrapper';
 
 export type DashboardProviderAPI = DashboardAPI;
 
 type Props = {
+  onCardChange?: (dashboardId: string, config: CardConfig) => void;
   onLayoutChange?: (dashboardId: string, layout: Layout[]) => void;
 
   dashboards: DashboardConfig[];
@@ -56,6 +58,7 @@ const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Pr
     enableRouter,
     onLayoutChange,
     readonly,
+    onCardChange,
   },
   ref,
 ) => {
@@ -108,7 +111,9 @@ const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Pr
                 readonly={readonly}
                 cols={dashboard.cols}
                 layout={dashboard.layout}
-                onLayoutChange={(layout) => onLayoutChange && onLayoutChange(dashboard.id, layout)}
+                onLayoutChange={
+                  onLayoutChange ? (layout) => onLayoutChange(dashboard.id, layout) : undefined
+                }
                 onDragStart={(id) => setDragId(id)}
                 onDragStop={() => setDragId(undefined)}
                 onResizeStart={(id) => setResizeId(id)}
@@ -116,9 +121,16 @@ const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Pr
               >
                 {dashboard.cards.map((card) => (
                   <div key={card.id}>
-                    <React.Suspense fallback={null}>
-                      <DashboardCardLoader config={card}>
-                        {(Component) => (
+                    <DashboardCardLoader config={card}>
+                      {(Component) => (
+                        <EditableWrapper
+                          config={card}
+                          onCardChange={
+                            onCardChange
+                              ? (config) => onCardChange(dashboard.id, config)
+                              : undefined
+                          }
+                        >
                           <DashboardCardFrame config={card} readonly={readonly}>
                             <Component
                               data={card.data}
@@ -126,9 +138,9 @@ const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Pr
                               dragging={dragId === card.id}
                             />
                           </DashboardCardFrame>
-                        )}
-                      </DashboardCardLoader>
-                    </React.Suspense>
+                        </EditableWrapper>
+                      )}
+                    </DashboardCardLoader>
                   </div>
                 ))}
               </DashboardGrid>
