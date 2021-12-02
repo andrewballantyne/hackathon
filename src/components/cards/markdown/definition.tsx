@@ -2,9 +2,10 @@ import MarkdownIcon from '@patternfly/react-icons/dist/esm/icons/markdown-icon';
 import { MarkdownCardData } from './types';
 import { CardDefinition } from '../../../types';
 import { dashboardMarkdownCards, quotaMarkdownCard } from '../../../test/base64-images';
+import { CardType } from '../types';
 
 const definition: CardDefinition<MarkdownCardData> = {
-  id: 'core.markdown',
+  id: CardType.MARKDOWN,
   label: 'Markdown',
   description: 'Displays a custom markdown message.',
   icon: <MarkdownIcon />,

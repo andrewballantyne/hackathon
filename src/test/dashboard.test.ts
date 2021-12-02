@@ -1,6 +1,7 @@
 import { DashboardTabConfig, CardDefinition, DashboardConfig } from '../types';
 
 import definitions from '../components/cards/definitions';
+import { CardType } from '../components/cards/types';
 
 export const cardDefinitions: CardDefinition[] = [...definitions];
 
@@ -15,7 +16,7 @@ export const dashboardTabs: DashboardTabConfig[] = [
     cards: [
       {
         id: 'redhat',
-        type: 'core.iframe',
+        type: CardType.IFRAME,
         data: {
           title: 'Red Hat',
           url: 'https://www.redhat.com',
@@ -24,7 +25,7 @@ export const dashboardTabs: DashboardTabConfig[] = [
 
       {
         id: 'quota',
-        type: 'core.markdown',
+        type: CardType.MARKDOWN,
         data: {
           title: 'Quota',
           description: 'Resource quotas',
@@ -44,7 +45,7 @@ export const dashboardTabs: DashboardTabConfig[] = [
     cards: [
       {
         id: 'team',
-        type: 'core.markdown',
+        type: CardType.MARKDOWN,
         frameless: true,
         data: {
           title: 'Team Event',
@@ -55,7 +56,7 @@ export const dashboardTabs: DashboardTabConfig[] = [
 
       {
         id: 'process',
-        type: 'core.markdown',
+        type: CardType.MARKDOWN,
         data: {
           title: 'Process',
           description: 'Read about the business process.',
@@ -65,7 +66,7 @@ export const dashboardTabs: DashboardTabConfig[] = [
 
       {
         id: 'changeLog',
-        type: 'core.markdown',
+        type: CardType.MARKDOWN,
         data: {
           title: 'Change Log',
           description: 'Read the change log for each release',

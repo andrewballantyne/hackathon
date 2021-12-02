@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { EmptyState, EmptyStateIcon, EmptyStateBody, Title } from '@patternfly/react-core';
 import CubesIcon from '@patternfly/react-icons/dist/js/icons/cubes-icon';
-import { Pages } from './const';
+import { HackathonPage } from './const';
 
 type NotFoundProps = {};
 
@@ -15,7 +15,7 @@ const NotFound: React.FC<NotFoundProps> = (props) => {
       </Title>
       <EmptyStateBody>
         <p>
-          Dashboards are over <Link to={Pages.DASHBOARD}>here</Link>.
+          Dashboards are over <Link to={HackathonPage.DASHBOARD}>here</Link>.
         </p>
       </EmptyStateBody>
     </EmptyState>

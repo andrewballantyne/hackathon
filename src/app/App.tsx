@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Catalog from '../components/catalog/Catalog';
 import { dashboard } from '../test/dashboard.test';
-import { Pages } from './const';
+import { HackathonPage } from './const';
 import NotFound from './NotFound';
 import DashboardPage from './DashboardPage';
 import PageWrapper from './PageWrapper';
@@ -15,11 +15,11 @@ const App: React.FC = () => {
       <PageWrapper>
         <Routes>
           <Route
-            path={Pages.DASHBOARD}
+            path={HackathonPage.DASHBOARD}
             // TODO make DashboardPage work with DashboardConfig
             element={<DashboardPage />}
           />
-          <Route path={Pages.CATALOG} element={<Catalog />} />
+          <Route path={HackathonPage.CATALOG} element={<Catalog />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </PageWrapper>

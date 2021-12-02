@@ -4,7 +4,7 @@ import { CardConfig, CardDefinition, DashboardConfig, DashboardTabConfig } from 
 import DashboardContext, { DashboardContextProps } from '../utils/DashboardContext';
 import useDashboardAdd from './useDashboardAdd';
 import { useNavigate } from 'react-router-dom';
-import { Pages } from '../app/const';
+import { HackathonPage } from '../app/const';
 
 type Props = {
   onDashboardChange?: (config: DashboardConfig) => void;
@@ -76,7 +76,7 @@ const DashboardProvider: React.FC<Props> = ({
               }, [] as DashboardTabConfig[]),
             }));
             // TODO: go to specific dashboard tab
-            navigate(Pages.DASHBOARD);
+            navigate(HackathonPage.DASHBOARD);
           }}
         />
       ) : undefined}

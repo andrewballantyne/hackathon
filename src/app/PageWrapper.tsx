@@ -16,7 +16,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import BarsIcon from '@patternfly/react-icons/dist/esm/icons/bars-icon';
-import { Pages } from './const';
+import { HackathonPage } from './const';
 
 type PageWrapperProps = {
   children: React.ReactNode;
@@ -62,16 +62,16 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
     >
       <NavList>
         <NavItem
-          id={Pages.DASHBOARD}
-          itemId={Pages.DASHBOARD}
-          isActive={Pages.DASHBOARD === navItemSelected}
+          id={HackathonPage.DASHBOARD}
+          itemId={HackathonPage.DASHBOARD}
+          isActive={HackathonPage.DASHBOARD === navItemSelected}
         >
           Dashboard
         </NavItem>
         <NavItem
-          id={Pages.CATALOG}
-          itemId={Pages.CATALOG}
-          isActive={Pages.CATALOG === navItemSelected}
+          id={HackathonPage.CATALOG}
+          itemId={HackathonPage.CATALOG}
+          isActive={HackathonPage.CATALOG === navItemSelected}
         >
           Catalog
         </NavItem>

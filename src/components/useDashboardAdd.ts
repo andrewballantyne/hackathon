@@ -1,6 +1,7 @@
 import { DashboardContextProps } from '../utils/DashboardContext';
 import { CardConfig } from '../types';
 import { MarkdownCardData } from './cards/markdown';
+import { CardType } from './cards/types';
 
 const useDashboardAdd = (
   editCard: DashboardContextProps['editCard'],
@@ -12,7 +13,7 @@ const useDashboardAdd = (
     } else {
       let newData = {};
       switch (cardType) {
-        case 'core.markdown':
+        case CardType.MARKDOWN:
           newData = {
             title: 'test',
             description: 'some other test',
