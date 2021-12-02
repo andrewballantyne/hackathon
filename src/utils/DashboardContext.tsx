@@ -2,6 +2,9 @@ import * as React from 'react';
 import { CardConfig, CardDefinition, DashboardConfig, Layout } from '../types';
 
 export type DashboardContextProps = {
+  // The base patch for each tab.
+  // Must end with '/'.
+  basePath?: string;
   dashboard: DashboardConfig;
   definitions: CardDefinition[];
   addCard: (cardType: string, defaults?: Partial<Omit<CardConfig, 'type'>>) => void;

@@ -10,6 +10,7 @@ type Props = {
   onDashboardChange?: (config: DashboardConfig) => void;
   dashboard?: DashboardConfig;
   definitions: CardDefinition[];
+  basePath?: string;
 };
 
 const DashboardProvider: React.FC<Props> = ({
@@ -17,6 +18,7 @@ const DashboardProvider: React.FC<Props> = ({
   definitions,
   children,
   onDashboardChange,
+  basePath,
 }) => {
   const [dashboardConfig, setDashboard] = React.useState<DashboardConfig>(dashboard);
   const [editState, setEditState] = React.useState<
@@ -56,7 +58,7 @@ const DashboardProvider: React.FC<Props> = ({
 
   return (
     <DashboardContext.Provider
-      value={{ dashboard: dashboardConfig, definitions, editCard, addCard, updateLayout }}
+      value={{ dashboard: dashboardConfig, definitions, editCard, addCard, updateLayout, basePath }}
     >
       {children}
       {editState ? (
@@ -92,8 +94,12 @@ const DashboardProvider: React.FC<Props> = ({
                 return acc;
               }, [] as DashboardTabConfig[]),
             }));
-            // TODO: go to specific dashboard tab
-            navigate(HackathonPage.DASHBOARD);
+
+            if (basePath) {
+              navigate(`${basePath}${tabId}`);
+            } else {
+              // TODO manage active id
+            }
           }}
         />
       ) : undefined}

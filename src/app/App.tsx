@@ -11,14 +11,14 @@ import definitions from '../components/cards/definitions';
 
 const App: React.FC = () => {
   return (
-    <DashboardProvider definitions={definitions} dashboard={dashboard}>
+    <DashboardProvider
+      definitions={definitions}
+      dashboard={dashboard}
+      basePath={`${HackathonPage.DASHBOARD}/`}
+    >
       <PageWrapper>
         <Routes>
-          <Route
-            path={`${HackathonPage.DASHBOARD}/*`}
-            // TODO make DashboardPage work with DashboardConfig
-            element={<DashboardPage />}
-          />
+          <Route path={`${HackathonPage.DASHBOARD}/*`} element={<DashboardPage />} />
           <Route path={HackathonPage.CATALOG} element={<Catalog />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>

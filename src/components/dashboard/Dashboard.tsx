@@ -22,10 +22,6 @@ type Props = {
   // uncontrolled default selected tab
   defaultSelectedTab?: string;
 
-  // The base patch for each tab.
-  // Must end with '/'.
-  basePath?: string;
-
   // control fullscreen mode
   fullscreenEnabled?: boolean;
   onFullscreen?: (enable: boolean) => void;
@@ -42,10 +38,10 @@ type Props = {
 };
 
 const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
-  { basePath, selectedTab, defaultSelectedTab, onTabChange, tabs, cardDefinitions, readonly },
+  { selectedTab, defaultSelectedTab, onTabChange, tabs, cardDefinitions, readonly },
   ref,
 ) => {
-  const { updateLayout } = React.useContext(DashboardContext);
+  const { updateLayout, basePath } = React.useContext(DashboardContext);
   const dashboardRef = React.useRef<DashboardFindNewNameAPI>(null);
   const [dragId, setDragId] = React.useState<string | undefined>();
   const [resizeId, setResizeId] = React.useState<string | undefined>();

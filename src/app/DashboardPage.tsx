@@ -46,7 +46,6 @@ const DashboardPage: React.FC<DashboardPageProps> = () => {
       <StackItem isFilled style={{ display: 'flex', overflow: 'hidden' }}>
         <Dashboard
           ref={dashboardProviderAPI}
-          // basePath={`${HackathonPage.DASHBOARD}/`}
           readonly={readonly}
           cardDefinitions={cardDefinitions}
           tabs={config.tabs}

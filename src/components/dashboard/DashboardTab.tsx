@@ -14,7 +14,14 @@ const DashboardTab: React.FC<Props> = ({ id, basePath, children, title }) => {
       eventKey={id}
       title={title}
       href={basePath ? `${basePath}${id}` : undefined}
-      {...(basePath ? { onClick: () => navigate(`${basePath}${id}`) } : {})}
+      {...(basePath
+        ? {
+            onClick: (e) => {
+              e.preventDefault();
+              navigate(`${basePath}${id}`);
+            },
+          }
+        : {})}
     >
       {children}
     </Tab>

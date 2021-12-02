@@ -64,7 +64,9 @@ const Catalog: React.FC<CatalogProps> = (props) => {
                       setSelectedId(cardDefinition.id);
                     }}
                     isSelected={selectedId === cardDefinition.id}
-                    onDashboardAdd={({ id, defaultData }) => addCard(id, { data: defaultData })}
+                    onDashboardAdd={({ id, defaultData }) =>
+                      addCard(id, defaultData ? { data: defaultData } : undefined)
+                    }
                   />
                 </GalleryItem>
               ))}
