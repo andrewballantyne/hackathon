@@ -2,6 +2,7 @@ import { DashboardContextProps } from '../utils/DashboardContext';
 import { CardConfig } from '../types';
 import { MarkdownCardData } from './cards/markdown';
 import { CardType } from './cards/types';
+import { IFrameCardData } from './cards/iframe';
 
 const useDashboardAdd = (
   editCard: DashboardContextProps['editCard'],
@@ -15,10 +16,16 @@ const useDashboardAdd = (
       switch (cardType) {
         case CardType.MARKDOWN:
           newData = {
-            title: 'test',
+            title: 'Markdown Test',
             description: 'some other test',
             markdown: '### big test',
           } as MarkdownCardData;
+          break;
+        case CardType.IFRAME:
+          newData = {
+            title: 'IFrame Test',
+            url: 'https://www.redhat.com',
+          } as IFrameCardData;
           break;
         default:
           // TODO: Create default for each type
