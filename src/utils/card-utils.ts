@@ -5,9 +5,8 @@ import { CardDefinition, CardProps, CardSettingsProps } from '../types';
 export const useCardDefinition = (id: string): CardDefinition => {
   const { definitions } = React.useContext(DashboardContext);
   const def = definitions.find((d) => d.id === id);
-  // TODO what happens if def is undefined
   if (!def) {
-    throw new Error();
+    throw new Error(`No card definition found for '${id}'.`);
   }
   return def;
 };

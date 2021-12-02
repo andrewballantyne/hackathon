@@ -9,7 +9,7 @@ type Props = {
 
 const DashboardSelector: React.FC<Props> = ({ tabId, onChange }) => {
   const [isOpen, setOpen] = React.useState(false);
-  const { definitions, dashboard } = React.useContext(DashboardContext);
+  const { dashboard } = React.useContext(DashboardContext);
 
   // TODO add support to create a new dashboard
   return dashboard.tabs ? (
@@ -20,11 +20,14 @@ const DashboardSelector: React.FC<Props> = ({ tabId, onChange }) => {
         selections={tabId}
         isOpen={isOpen}
         onToggle={setOpen}
-        onSelect={(e, selection) => onChange(tabId)}
+        onSelect={(e, selection) => {
+          onChange(selection as string);
+          setOpen(false);
+        }}
       >
-        {definitions.map((def) => (
-          <SelectOption key={def.id} value={def.id}>
-            {def.label}
+        {dashboard.tabs.map((tab) => (
+          <SelectOption key={tab.id} value={tab.id}>
+            {tab.label}
           </SelectOption>
         ))}
       </Select>
