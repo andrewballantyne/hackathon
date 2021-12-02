@@ -5,7 +5,12 @@ import { IFrameCardData } from './types';
 
 const IFrameCardSettings: React.FC<CardSettingsProps<IFrameCardData>> = ({ onChange, data }) => (
   <>
-    <FormGroup label="Title" isRequired fieldId="iframe-card-title">
+    <FormGroup
+      label="Title"
+      isRequired
+      fieldId="iframe-card-title"
+      helperText="Indicate its content to the user for accessibility."
+    >
       <TextInput
         value={data.title}
         isRequired
