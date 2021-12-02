@@ -52,7 +52,7 @@ const Catalog: React.FC<CatalogProps> = (props) => {
           <PageSection onClick={() => setSelectedId('')}>
             <Gallery hasGutter maxWidths={MAX_WIDTHS} minWidths={MIN_WIDTHS}>
               {cardDefinitions.map((cardDefinition) => (
-                <GalleryItem key={cardDefinition.id} className="catalog__gallery-item">
+                <GalleryItem key={cardDefinition.id}>
                   <CatalogCard
                     cardDefinition={cardDefinition}
                     onSelect={(e) => {
