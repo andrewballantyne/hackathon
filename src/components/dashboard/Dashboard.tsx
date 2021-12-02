@@ -1,6 +1,5 @@
 import * as React from 'react';
 import DashboardTabs from './DashboardTabs';
-import DashboardFindNewName, { DashboardFindNewNameAPI } from './DashboardFindNewName';
 import DashboardTab from './DashboardTab';
 import DashboardRouter from './DashboardRouter';
 import DashboardCardLoader from './DashboardCardLoader';
@@ -9,7 +8,12 @@ import { DashboardCardFrame } from '../card-structure';
 import EditableWrapper from '../card-editor/EditableWrapper';
 import DashboardContext from '../../utils/DashboardContext';
 
-export type DashboardAPI = DashboardFindNewNameAPI;
+import './Dashboard.scss';
+import { useFullscreen } from '../../utils/fullscreen';
+
+export type DashboardAPI = {
+  fullscreenToggle(): void;
+};
 
 type Props = {
   // The base patch for each tab.
@@ -41,16 +45,16 @@ const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
   ref,
 ) => {
   const {
-    definitions,
     dashboard: { tabs },
     updateLayout,
   } = React.useContext(DashboardContext);
-  const dashboardRef = React.useRef<DashboardFindNewNameAPI>(null);
   const [dragId, setDragId] = React.useState<string | undefined>();
   const [resizeId, setResizeId] = React.useState<string | undefined>();
 
+  const [isFullscreen, fullscreenRef, fullscreenToggle] = useFullscreen<HTMLDivElement>();
+
   React.useImperativeHandle(ref, () => ({
-    fullscreenToggle: () => dashboardRef.current?.fullscreenToggle(),
+    fullscreenToggle,
   }));
 
   const firstTab = selectedTab ?? defaultSelectedTab ?? tabs[0]?.id ?? undefined;
@@ -74,7 +78,7 @@ const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
   }, [selectedTab, basePath]);
 
   const contents = (selected: string | undefined) => (
-    <DashboardFindNewName cardDefinitions={definitions} ref={dashboardRef}>
+    <div className="pf-dashboard" ref={fullscreenRef}>
       <DashboardTabs
         onChange={onChange}
         selected={selected}
@@ -91,6 +95,7 @@ const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
             {selected === tab.id ? (
               <DashboardGrid
                 readonly={readonly}
+                isFullscreen={isFullscreen}
                 cols={tab.cols}
                 layout={tab.layout}
                 onLayoutChange={(layout) => updateLayout(tab.id, layout)}
@@ -121,7 +126,7 @@ const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
           </DashboardTab>
         ))}
       </DashboardTabs>
-    </DashboardFindNewName>
+    </div>
   );
 
   return basePath ? (
