@@ -25,6 +25,7 @@ const MarkdownCardSettings: React.FC<CardSettingsProps<MarkdownCardData>> = ({
         name="horizontal-form-exp"
         id="markdown-card-markdown"
         onChange={(markdown) => onChange({ ...data, markdown })}
+        rows={10}
       />
     </FormGroup>
   </>
