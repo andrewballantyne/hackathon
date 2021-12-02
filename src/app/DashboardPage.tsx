@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import DashboardProvider, { DashboardProviderAPI } from '../components/dashboard/DashboardProvider';
 import { cardDefinitions, dashboards } from '../test/dashboard.test';
-import { CardConfig, DashboardConfig } from '../types';
+import { DashboardConfig } from '../types';
 
 const DashboardPage: React.FC = () => {
   const [config, setConfig] = React.useState(dashboards);
