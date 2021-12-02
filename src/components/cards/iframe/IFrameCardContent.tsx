@@ -1,7 +1,7 @@
 import { EmptyState, EmptyStateIcon, Title } from '@patternfly/react-core';
 import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
 import React from 'react';
-import { IFrameCardData } from '.';
+import { IFrameCardData } from './types';
 import { CardProps } from '../../../types';
 
 const MarkdownCardContent: React.FC<CardProps<IFrameCardData>> = ({ data: { title, url } }) =>

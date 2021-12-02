@@ -15,8 +15,8 @@ import TabEditorModal from '../components/tab-editor/TabEditorModal';
 type DashboardPageProps = {};
 
 const DashboardPage: React.FC<DashboardPageProps> = () => {
-  const [readonly, setReadonly] = React.useState(false);
   const [tabEditorOpen, setTabEditorOpen] = React.useState(false);
+  const [readonly, setReadonly] = React.useState(true);
 
   const dashboardProviderAPI = React.useRef<DashboardAPI>(null);
 

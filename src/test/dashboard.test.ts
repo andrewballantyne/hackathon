@@ -75,6 +75,68 @@ export const dashboardTabs: DashboardTabConfig[] = [
       },
     ],
   },
+  {
+    id: 'charts',
+    label: 'Charts',
+    layout: [
+      { i: 'c1', x: 0, y: 0, w: 4, h: 2 },
+      { i: 'c2', x: 4, y: 0, w: 4, h: 2 },
+      { i: 'c3', x: 8, y: 0, w: 4, h: 2 },
+    ],
+    cards: [
+      {
+        id: 'c1',
+        type: CardType.DONUT,
+        frameless: true,
+        data: {
+          ariaDesc: 'Average number of pets',
+          ariaTitle: 'Donut chart example',
+          data: [
+            { x: 'Cats', y: 25 },
+            { x: 'Dogs', y: 15 },
+            { x: 'Birds', y: 60 },
+          ],
+          unit: '%',
+          subTitle: 'Pets',
+          title: '100',
+        },
+      },
+      {
+        id: 'c2',
+        type: CardType.DONUT,
+        frameless: true,
+        data: {
+          ariaDesc: 'Average number of pets',
+          ariaTitle: 'Donut chart example',
+          data: [
+            { x: 'Cats', y: 35 },
+            { x: 'Dogs', y: 55 },
+            { x: 'Birds', y: 10 },
+          ],
+          unit: '%',
+          subTitle: 'Pets',
+          title: '100',
+        },
+      },
+      {
+        id: 'c3',
+        type: CardType.DONUT,
+        frameless: true,
+        data: {
+          ariaDesc: 'Average number of pets',
+          ariaTitle: 'Donut chart example',
+          data: [
+            { x: 'Cats', y: 40 },
+            { x: 'Dogs', y: 20 },
+            { x: 'Birds', y: 40 },
+          ],
+          unit: '%',
+          subTitle: 'Pets',
+          title: '100',
+        },
+      },
+    ],
+  },
 ];
 
 export const dashboard: DashboardConfig = {
