@@ -1,4 +1,4 @@
-import { Button, Modal, ModalVariant, Title } from '@patternfly/react-core';
+import { Button, Modal, ModalVariant } from '@patternfly/react-core';
 import * as React from 'react';
 import DefinitionTitle from '../common/DefinitionTitle';
 import { CardConfig } from '../../types';
