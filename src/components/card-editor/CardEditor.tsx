@@ -1,14 +1,16 @@
+import * as React from 'react';
 import {
   Drawer,
   DrawerContent,
   DrawerContentBody,
   DrawerHead,
   DrawerPanelContent,
+  Form,
 } from '@patternfly/react-core';
-import * as React from 'react';
 import { CardConfig } from '../../types';
 import CardEditorPreview from './CardEditorPreview';
 import CardEditorSettings from './CardEditorSettings';
+import CardEditorDefaultSettings from './CardEditorDefaultSettings';
 
 import './CardEditor.scss';
 
@@ -28,7 +30,10 @@ const CardEditor: React.FC<Props> = ({ config, onChange }) => (
           minSize={'300px'}
         >
           <DrawerHead>
-            <CardEditorSettings config={config} onChange={onChange} />
+            <Form>
+              <CardEditorDefaultSettings config={config} onChange={onChange} />
+              <CardEditorSettings config={config} onChange={onChange} />
+            </Form>
           </DrawerHead>
         </DrawerPanelContent>
       }

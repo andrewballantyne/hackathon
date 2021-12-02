@@ -1,10 +1,10 @@
-import { Form, FormGroup, TextInput } from '@patternfly/react-core';
 import * as React from 'react';
+import { FormGroup, TextInput } from '@patternfly/react-core';
 import { CardSettingsProps } from '../../../types';
 import { IFrameCardData } from './types';
 
 const IFrameCardSettings: React.FC<CardSettingsProps<IFrameCardData>> = ({ onChange, data }) => (
-  <Form isHorizontal>
+  <>
     <FormGroup label="Title" isRequired fieldId="iframe-card-title">
       <TextInput
         value={data.title}
@@ -25,7 +25,7 @@ const IFrameCardSettings: React.FC<CardSettingsProps<IFrameCardData>> = ({ onCha
         onChange={(url) => onChange({ ...data, url })}
       />
     </FormGroup>
-  </Form>
+  </>
 );
 
 export default IFrameCardSettings;

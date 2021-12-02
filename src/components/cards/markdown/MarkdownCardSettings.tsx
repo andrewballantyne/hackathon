@@ -1,5 +1,5 @@
-import { Form, FormGroup, TextArea, TextInput } from '@patternfly/react-core';
 import * as React from 'react';
+import { FormGroup, TextArea, TextInput } from '@patternfly/react-core';
 import { CardSettingsProps } from '../../../types';
 import { MarkdownCardData } from './types';
 
@@ -7,7 +7,7 @@ const MarkdownCardSettings: React.FC<CardSettingsProps<MarkdownCardData>> = ({
   onChange,
   data,
 }) => (
-  <Form>
+  <>
     <FormGroup label="Title" isRequired fieldId="markdown-card-title">
       <TextInput
         value={data.title}
@@ -27,7 +27,7 @@ const MarkdownCardSettings: React.FC<CardSettingsProps<MarkdownCardData>> = ({
         onChange={(markdown) => onChange({ ...data, markdown })}
       />
     </FormGroup>
-  </Form>
+  </>
 );
 
 export default MarkdownCardSettings;
