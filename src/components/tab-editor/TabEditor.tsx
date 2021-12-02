@@ -15,6 +15,7 @@ import {
   StackItem,
   TextInput,
   Bullseye,
+  InputGroup,
 } from '@patternfly/react-core';
 import TrashAltIcon from '@patternfly/react-icons/dist/esm/icons/trash-alt-icon';
 import { DashboardTabConfig } from '../../types';
@@ -70,34 +71,35 @@ const TabEditor: React.FC<TabEditorProps> = ({ tabs, updateTabs }) => {
                       <DataListItemCells
                         dataListCells={[
                           <DataListCell key={id}>
-                            <TextInput
-                              id={id}
-                              value={label}
-                              onChange={(newValue) => {
-                                updateTabs(
-                                  tabs.map((tab) => {
-                                    if (tab.id === id) {
-                                      return {
-                                        ...tab,
-                                        label: newValue,
-                                      };
-                                    }
-                                    return tab;
-                                  }),
-                                );
-                              }}
-                            />
+                            <InputGroup>
+                              <TextInput
+                                id={id}
+                                value={label}
+                                onChange={(newValue) => {
+                                  updateTabs(
+                                    tabs.map((tab) => {
+                                      if (tab.id === id) {
+                                        return {
+                                          ...tab,
+                                          label: newValue,
+                                        };
+                                      }
+                                      return tab;
+                                    }),
+                                  );
+                                }}
+                              />
+                              <Button
+                                variant="control"
+                                icon={<TrashAltIcon />}
+                                onClick={() => {
+                                  updateTabs(tabs.filter((tab) => tab.id !== id));
+                                }}
+                              />
+                            </InputGroup>
                           </DataListCell>,
                         ]}
                       />
-                      <DataListControl>
-                        <Button
-                          icon={<TrashAltIcon />}
-                          onClick={() => {
-                            updateTabs(tabs.filter((tab) => tab.id !== id));
-                          }}
-                        />
-                      </DataListControl>
                     </DataListItemRow>
                   </DataListItem>
                 </Draggable>
