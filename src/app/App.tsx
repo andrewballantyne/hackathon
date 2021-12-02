@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Catalog from '../components/catalog/Catalog';
 import { dashboard } from '../test/dashboard.test';
-import { CardConfig, CatalogCardDefinition, DashboardConfig } from '../types';
+import { CardConfig, CardDefinition, DashboardConfig } from '../types';
 import { Pages } from './const';
 import NotFound from './NotFound';
 import DashboardPage from './DashboardPage';
@@ -11,7 +11,7 @@ import CardEditorModal from '../components/card-editor/CardEditorModal';
 import DashboardProvider from '../components/DashboardProvider';
 import definitions from '../components/cards/definitions';
 
-const createBasicCardConfig = (cardDefinition: CatalogCardDefinition): CardConfig => {
+const createBasicCardConfig = (cardDefinition: CardDefinition): CardConfig => {
   console.debug('converting cardDefinition', cardDefinition);
 
   let data = {};

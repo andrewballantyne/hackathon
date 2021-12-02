@@ -2,18 +2,18 @@ import * as React from 'react';
 import { Bullseye, Button, Split, SplitItem } from '@patternfly/react-core';
 import AngleLeftIcon from '@patternfly/react-icons/dist/esm/icons/angle-left-icon';
 import AngleRightIcon from '@patternfly/react-icons/dist/esm/icons/angle-right-icon';
-import { CatalogCardDefinition } from '../../types';
+import { CardDefinition } from '../../types';
 
 import './CatalogImageDeck.scss';
 
 type CatalogImageDeckProps = {
-  images: CatalogCardDefinition['images'];
+  images: CardDefinition['images'];
 };
 
 const CatalogImageDeck: React.FC<CatalogImageDeckProps> = ({ images }) => {
   const [index, setIndex] = React.useState(0);
   const min = 0;
-  const max = images.length - 1;
+  const max = images ? images.length - 1 : 0;
 
   return (
     <Split className="catalog-image-deck">
@@ -31,11 +31,13 @@ const CatalogImageDeck: React.FC<CatalogImageDeckProps> = ({ images }) => {
           </Button>
         </Bullseye>
       </SplitItem>
-      <SplitItem isFilled className="catalog-image-deck__image-container">
-        <Bullseye>
-          <img src={images[index]} alt="rotating preview" className="catalog-image-deck__image" />
-        </Bullseye>
-      </SplitItem>
+      {images && images.length > 0 && (
+        <SplitItem isFilled className="catalog-image-deck__image-container">
+          <Bullseye>
+            <img src={images[index]} alt="rotating preview" className="catalog-image-deck__image" />
+          </Bullseye>
+        </SplitItem>
+      )}
       <SplitItem>
         <Bullseye>
           <Button

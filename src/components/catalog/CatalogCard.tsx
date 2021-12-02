@@ -14,17 +14,17 @@ import {
 } from '@patternfly/react-core';
 import OutlinedFileImage from '@patternfly/react-icons/dist/js/icons/outlined-file-image-icon';
 import PlusIcon from '@patternfly/react-icons/dist/js/icons/plus-icon';
-import { CatalogCardDefinition } from '../../types';
+import { CardDefinition } from '../../types';
 import CatalogIcon from './CatalogIcon';
 import CatalogImageDeck from './CatalogImageDeck';
 
 import './CatalogCard.scss';
 
 type CatalogCardProps = {
-  cardDefinition: CatalogCardDefinition;
+  cardDefinition: CardDefinition;
   isSelected?: boolean;
   onSelect: React.MouseEventHandler<HTMLElement>;
-  onDashboardAdd: (cardDefinition: CatalogCardDefinition) => void;
+  onDashboardAdd: (cardDefinition: CardDefinition) => void;
 };
 
 const CatalogCard: React.FC<CatalogCardProps> = ({
@@ -35,7 +35,7 @@ const CatalogCard: React.FC<CatalogCardProps> = ({
 }) => {
   const { label, icon, images } = cardDefinition;
 
-  const hasImages = images.filter((v) => !!v).length > 0;
+  const hasImages = images && images.filter((v) => !!v).length > 0;
 
   return (
     <Card

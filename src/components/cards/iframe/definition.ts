@@ -1,7 +1,7 @@
 import { IFrameCardData } from './types';
-import { CatalogCardDefinition } from '../../../types';
+import { CardDefinition } from '../../../types';
 
-const definition: CatalogCardDefinition<IFrameCardData> = {
+const definition: CardDefinition<IFrameCardData> = {
   id: 'core.iframe',
   label: 'IFrame',
   description: 'Displays an iframe.',

@@ -12,7 +12,7 @@ import {
   PageSection,
 } from '@patternfly/react-core';
 import { cardDefinitions } from '../../test/dashboard.test';
-import { CatalogCardDefinition } from '../../types';
+import { CardDefinition } from '../../types';
 import CatalogCard from './CatalogCard';
 import CatalogSelectedSidebarContent from './CatalogSelectedSidebarContent';
 
@@ -24,14 +24,14 @@ const MAX_WIDTHS = {
 const MIN_WIDTHS = MAX_WIDTHS;
 
 type CatalogProps = {
-  onNewCardInstance: (cardDefinition: CatalogCardDefinition) => void;
+  onNewCardInstance: (cardDefinition: CardDefinition) => void;
 };
 
 const Catalog: React.FC<CatalogProps> = ({ onNewCardInstance }) => {
   const [selectedId, setSelectedId] = React.useState<string>('');
 
   // TODO: did we want to pass in the definitions?
-  const selectedDefinition: CatalogCardDefinition | undefined = cardDefinitions.find(
+  const selectedDefinition: CardDefinition | undefined = cardDefinitions.find(
     ({ id }) => id === selectedId,
   );
   const isExpanded = !!selectedDefinition;

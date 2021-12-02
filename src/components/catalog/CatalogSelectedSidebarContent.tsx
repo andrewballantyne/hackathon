@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { CatalogCardDefinition } from '../../types';
+import { CardDefinition } from '../../types';
 import { Stack, StackItem, Title, TitleSizes } from '@patternfly/react-core';
 import CatalogImage from './CatalogImage';
 import CatalogIcon from './CatalogIcon';
 
 type CatalogSelectedSidebarContentProps = {
-  selectedDefinition?: CatalogCardDefinition;
+  selectedDefinition?: CardDefinition;
 };
 
 const CatalogSelectedSidebarContent: React.FC<CatalogSelectedSidebarContentProps> = ({
@@ -15,7 +15,7 @@ const CatalogSelectedSidebarContent: React.FC<CatalogSelectedSidebarContentProps
 
   const { label, description, icon, images } = selectedDefinition;
 
-  const validImages = images.filter((src) => !!src);
+  const validImages = images ? images.filter((src) => !!src) : [];
 
   return (
     <Stack hasGutter>

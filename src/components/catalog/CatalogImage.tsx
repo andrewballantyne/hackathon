@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Bullseye, Button, Modal, ModalVariant } from '@patternfly/react-core';
-import { CatalogCardDefinition } from '../../types';
 
 import './CatalogImage.scss';
 
 type CatalogImageProps = {
-  src: CatalogCardDefinition['images'][0];
+  src: string;
 };
 
 const CatalogImage: React.FC<CatalogImageProps> = ({ src }) => {

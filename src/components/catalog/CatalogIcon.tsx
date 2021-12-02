@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { CatalogCardDefinition } from '../../types';
+import { CardDefinition } from '../../types';
 
 type CatalogIconProps = {
-  icon: CatalogCardDefinition['icon'];
+  icon: CardDefinition['icon'];
 };
 
 const CatalogIcon: React.FC<CatalogIconProps> = ({ icon }) => {
