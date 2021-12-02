@@ -13,7 +13,6 @@ const CardEditorDefaultSettings: React.FC<Props> = ({ onChange, config }) => (
       id="core.config-frameless"
       label="Frameless"
       isChecked={config.frameless}
-      // TODO pass in dashboard ID
       onChange={(frameless) => onChange({ ...config, frameless })}
     />
   </FormGroup>

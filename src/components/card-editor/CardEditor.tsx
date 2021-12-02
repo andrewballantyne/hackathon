@@ -36,11 +36,7 @@ const CardEditor: React.FC<Props> = ({ config, tabId, onChange }) => {
               <Form>
                 <DashboardSelector tabId={tabId} onChange={(tabId) => onChange(config, tabId)} />
                 <CardEditorDefaultSettings config={config} onChange={(c) => onChange(c, tabId)} />
-                <CardEditorSettings
-                  config={config}
-                  // TODO get tabId from state
-                  onChange={(c) => onChange(c, tabId)}
-                />
+                <CardEditorSettings config={config} onChange={(c) => onChange(c, tabId)} />
               </Form>
             </DrawerHead>
           </DrawerPanelContent>
