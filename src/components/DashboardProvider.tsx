@@ -3,14 +3,11 @@ import CardEditorModal from './card-editor/CardEditorModal';
 import { CardConfig, CardDefinition, DashboardConfig, DashboardTabConfig, Layout } from '../types';
 import DashboardContext, { DashboardContextProps } from '../utils/DashboardContext';
 import useDashboardAdd from './useDashboardAdd';
-import { useNavigate } from 'react-router-dom';
-import { HackathonPage } from '../app/const';
 
 type Props = {
   onDashboardChange?: (config: DashboardConfig) => void;
   dashboard?: DashboardConfig;
   definitions: CardDefinition[];
-  basePath?: string;
 };
 
 const DashboardProvider: React.FC<Props> = ({
@@ -18,13 +15,11 @@ const DashboardProvider: React.FC<Props> = ({
   definitions,
   children,
   onDashboardChange,
-  basePath,
 }) => {
   const [dashboardConfig, setDashboard] = React.useState<DashboardConfig>(dashboard);
   const [editState, setEditState] = React.useState<
     Parameters<DashboardContextProps['editCard']>[0] | undefined
   >();
-  const navigate = useNavigate();
 
   const editCard = React.useCallback<DashboardContextProps['editCard']>((config: CardConfig) => {
     setEditState(config);
@@ -58,7 +53,7 @@ const DashboardProvider: React.FC<Props> = ({
 
   return (
     <DashboardContext.Provider
-      value={{ dashboard: dashboardConfig, definitions, editCard, addCard, updateLayout, basePath }}
+      value={{ dashboard: dashboardConfig, definitions, editCard, addCard, updateLayout }}
     >
       {children}
       {editState ? (
@@ -94,12 +89,6 @@ const DashboardProvider: React.FC<Props> = ({
                 return acc;
               }, [] as DashboardTabConfig[]),
             }));
-
-            if (basePath) {
-              navigate(`${basePath}${tabId}`);
-            } else {
-              // TODO manage active id
-            }
           }}
         />
       ) : undefined}

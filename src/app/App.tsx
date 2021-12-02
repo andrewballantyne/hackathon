@@ -11,11 +11,7 @@ import definitions from '../components/cards/definitions';
 
 const App: React.FC = () => {
   return (
-    <DashboardProvider
-      definitions={definitions}
-      dashboard={dashboard}
-      basePath={`${HackathonPage.DASHBOARD}/`}
-    >
+    <DashboardProvider definitions={definitions} dashboard={dashboard}>
       <PageWrapper>
         <Routes>
           <Route path={`${HackathonPage.DASHBOARD}/*`} element={<DashboardPage />} />

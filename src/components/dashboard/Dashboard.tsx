@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { CardDefinition, DashboardTabConfig } from '../../types';
 import DashboardTabs from './DashboardTabs';
 import DashboardFindNewName, { DashboardFindNewNameAPI } from './DashboardFindNewName';
 import DashboardTab from './DashboardTab';
@@ -13,7 +12,9 @@ import DashboardContext from '../../utils/DashboardContext';
 export type DashboardAPI = DashboardFindNewNameAPI;
 
 type Props = {
-  tabs: DashboardTabConfig[];
+  // The base patch for each tab.
+  // Must end with '/'.
+  basePath?: string;
 
   // control selected tab
   // alternatively supply a baseURL and control the tabs via routes
@@ -32,16 +33,18 @@ type Props = {
     cycleDelay?: number;
   };
 
-  cardDefinitions: CardDefinition[];
-
   readonly?: boolean;
 };
 
 const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
-  { selectedTab, defaultSelectedTab, onTabChange, tabs, cardDefinitions, readonly },
+  { selectedTab, defaultSelectedTab, onTabChange, readonly, basePath },
   ref,
 ) => {
-  const { updateLayout, basePath } = React.useContext(DashboardContext);
+  const {
+    definitions,
+    dashboard: { tabs },
+    updateLayout,
+  } = React.useContext(DashboardContext);
   const dashboardRef = React.useRef<DashboardFindNewNameAPI>(null);
   const [dragId, setDragId] = React.useState<string | undefined>();
   const [resizeId, setResizeId] = React.useState<string | undefined>();
@@ -71,7 +74,7 @@ const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
   }, [selectedTab, basePath]);
 
   const contents = (selected: string | undefined) => (
-    <DashboardFindNewName cardDefinitions={cardDefinitions} ref={dashboardRef}>
+    <DashboardFindNewName cardDefinitions={definitions} ref={dashboardRef}>
       <DashboardTabs
         onChange={onChange}
         selected={selected}

@@ -10,13 +10,10 @@ import {
 } from '@patternfly/react-core';
 import * as React from 'react';
 import Dashboard, { DashboardAPI } from '../components/dashboard/Dashboard';
-import { cardDefinitions } from '../test/dashboard.test';
-import DashboardContext from '../utils/DashboardContext';
 
 type DashboardPageProps = {};
 
 const DashboardPage: React.FC<DashboardPageProps> = () => {
-  const { dashboard: config } = React.useContext(DashboardContext);
   const [readonly, setReadonly] = React.useState(false);
 
   const dashboardProviderAPI = React.useRef<DashboardAPI>(null);
@@ -45,10 +42,9 @@ const DashboardPage: React.FC<DashboardPageProps> = () => {
       </StackItem>
       <StackItem isFilled style={{ display: 'flex', overflow: 'hidden' }}>
         <Dashboard
+          // basePath={`${HackathonPage.DASHBOARD}/`}
           ref={dashboardProviderAPI}
           readonly={readonly}
-          cardDefinitions={cardDefinitions}
-          tabs={config.tabs}
         />
       </StackItem>
     </Stack>
