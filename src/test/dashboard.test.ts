@@ -2,6 +2,7 @@ import { DashboardTabConfig, CardDefinition, DashboardConfig } from '../types';
 
 import definitions from '../components/cards/definitions';
 import { CardType } from '../components/cards/types';
+import { markdownTest } from './markdown';
 
 export const cardDefinitions: CardDefinition[] = [...definitions];
 
@@ -10,8 +11,8 @@ export const dashboardTabs: DashboardTabConfig[] = [
     id: 'overviewTab',
     label: 'Overview',
     layout: [
-      { i: 'redhat', x: 0, y: 0, w: 4, h: 3 },
-      { i: 'quota', x: 4, y: 0, w: 4, h: 2 },
+      { i: 'redhat', x: 4, y: 0, w: 4, h: 3 },
+      { i: 'quota', x: 8, y: 0, w: 4, h: 2 },
     ],
     cards: [
       {
@@ -27,9 +28,9 @@ export const dashboardTabs: DashboardTabConfig[] = [
         id: 'quota',
         type: CardType.MARKDOWN,
         data: {
-          title: 'Quota',
-          description: 'Resource quotas',
-          markdown: '## Quota markdown',
+          title: 'Markdown Test',
+          description: 'tests a whole bunch of markdown',
+          markdown: markdownTest,
         },
       },
     ],
@@ -38,7 +39,7 @@ export const dashboardTabs: DashboardTabConfig[] = [
     id: 'teamTab',
     label: 'Team',
     layout: [
-      { i: 'team', x: 0, y: 0, w: 4, h: 3 },
+      { i: 'team', x: 0, y: 0, w: 4, h: 1 },
       { i: 'process', x: 4, y: 0, w: 4, h: 2 },
       { i: 'changeLog', x: 8, y: 0, w: 4, h: 1 },
     ],
