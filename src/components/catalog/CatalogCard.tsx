@@ -24,9 +24,15 @@ type CatalogCardProps = {
   cardDefinition: CatalogCardDefinition;
   isSelected?: boolean;
   onSelect: React.MouseEventHandler<HTMLElement>;
+  onDashboardAdd: (cardDefinition: CatalogCardDefinition) => void;
 };
 
-const CatalogCard: React.FC<CatalogCardProps> = ({ cardDefinition, isSelected, onSelect }) => {
+const CatalogCard: React.FC<CatalogCardProps> = ({
+  cardDefinition,
+  isSelected,
+  onSelect,
+  onDashboardAdd,
+}) => {
   const { label, icon, images } = cardDefinition;
 
   const hasImages = images.filter((v) => !!v).length > 0;
@@ -50,7 +56,7 @@ const CatalogCard: React.FC<CatalogCardProps> = ({ cardDefinition, isSelected, o
             icon={<PlusIcon />}
             onClick={(e) => {
               e.stopPropagation();
-              alert('you shall not pass (today)');
+              onDashboardAdd(cardDefinition);
             }}
           >
             Dashboard

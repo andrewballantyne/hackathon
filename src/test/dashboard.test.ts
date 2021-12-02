@@ -1,8 +1,8 @@
-import { DashboardConfig } from '../types';
+import { CatalogCardDefinition, DashboardConfig } from '../types';
 
 import definitions from '../components/cards/definitions';
 
-export const cardDefinitions = [...definitions];
+export const cardDefinitions: CatalogCardDefinition[] = [...definitions];
 
 export const dashboards: DashboardConfig[] = [
   {

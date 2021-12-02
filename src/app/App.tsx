@@ -20,12 +20,25 @@ import Catalog from '../components/catalog/Catalog';
 import { Pages } from './const';
 import NotFound from './NotFound';
 import DashboardPage from './DashboardPage';
+import { dashboards } from '../test/dashboard.test';
+import { CatalogCardDefinition } from '../types';
 
 const App: React.FC = () => {
-  const navigate = useNavigate();
   const [isNavOpen, setNavOpen] = React.useState(true);
+  const [config, setConfig] = React.useState(dashboards);
+  const navigate = useNavigate();
   const location = useLocation();
   const navItemSelected = location.pathname;
+
+  const addDashboardCard = React.useCallback(
+    (cardDefinition: CatalogCardDefinition) => {
+      // update the config to take a definition and add it to the dashboard... maybe a modal?
+      // TODO: Implement
+      console.debug('new definition', cardDefinition);
+      console.debug('existing config', config);
+    },
+    [config],
+  );
 
   const headerToolbar = (
     <Toolbar id="toolbar">
@@ -82,8 +95,11 @@ const App: React.FC = () => {
   return (
     <Page header={Header} sidebar={Sidebar}>
       <Routes>
-        <Route path={Pages.DASHBOARD} element={<DashboardPage />} />
-        <Route path={Pages.CATALOG} element={<Catalog />} />
+        <Route
+          path={Pages.DASHBOARD}
+          element={<DashboardPage config={config} setConfig={setConfig} />}
+        />
+        <Route path={Pages.CATALOG} element={<Catalog onNewCardInstance={addDashboardCard} />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </Page>

@@ -8,13 +8,17 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import DashboardProvider, { DashboardProviderAPI } from '../components/dashboard/DashboardProvider';
-import { cardDefinitions, dashboards } from '../test/dashboard.test';
+import { cardDefinitions } from '../test/dashboard.test';
 import { DashboardConfig } from '../types';
 
-const DashboardPage: React.FC = () => {
-  const [config, setConfig] = React.useState(dashboards);
+type DashboardPageProps = {
+  config: DashboardConfig[];
+  setConfig: Dispatch<SetStateAction<DashboardConfig[]>>;
+};
+
+const DashboardPage: React.FC<DashboardPageProps> = ({ config, setConfig }) => {
   const [readonly, setReadonly] = React.useState(false);
 
   const dashboardProviderAPI = React.useRef<DashboardProviderAPI>(null);
