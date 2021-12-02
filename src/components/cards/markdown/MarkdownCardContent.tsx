@@ -1,3 +1,4 @@
+import { TextContent } from '@patternfly/react-core';
 import React from 'react';
 import { Converter } from 'showdown';
 import { CardProps } from '../../../types';
@@ -14,9 +15,9 @@ const MarkdownCardContent: React.FC<CardProps<MarkdownCardData>> = ({
   data: { title, description, markdown },
 }) => (
   <DashboardCardContent>
-    <DashboardCardTitle title={description}>{title}</DashboardCardTitle>
+    {title ? <DashboardCardTitle title={description}>{title}</DashboardCardTitle> : undefined}
     <DashboardCardBody style={{ overflow: 'auto' }}>
-      <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(markdown) }} />
+      <TextContent dangerouslySetInnerHTML={{ __html: converter.makeHtml(markdown) }} />
     </DashboardCardBody>
   </DashboardCardContent>
 );
