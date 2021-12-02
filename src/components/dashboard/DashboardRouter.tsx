@@ -4,12 +4,13 @@ import { useLocation, matchPath } from 'react-router-dom';
 type Props = {
   basePath: string;
   children: (selectedTab: string | undefined) => JSX.Element;
+  defaultTab: string;
 };
 
-const DashboardRouter: React.FC<Props> = ({ basePath, children }) => {
+const DashboardRouter: React.FC<Props> = ({ basePath, children, defaultTab }) => {
   const { pathname } = useLocation();
   const match = matchPath(`${basePath}:id`, pathname);
-  const id = match?.params?.id;
+  const id = match?.params?.id ?? defaultTab;
   return children(id);
 };
 

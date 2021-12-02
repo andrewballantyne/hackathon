@@ -25,11 +25,7 @@ type Props = {
 
   // The base patch for each tab.
   // Must end with '/'.
-  // Defaults to '/'.
   basePath?: string;
-
-  // control selected tab via route
-  enableRouter?: boolean;
 
   // control fullscreen mode
   fullscreenEnabled?: boolean;
@@ -48,13 +44,12 @@ type Props = {
 
 const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
   {
-    basePath = '/',
+    basePath,
     selectedTab,
     defaultSelectedTab,
     onTabChange,
     tabs,
     cardDefinitions,
-    enableRouter,
     onLayoutChange,
     readonly,
   },
@@ -68,33 +63,32 @@ const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
     fullscreenToggle: () => dashboardRef.current?.fullscreenToggle(),
   }));
 
-  const [activeTab, setActiveTab] = React.useState<string | undefined>(
-    selectedTab ?? defaultSelectedTab ?? tabs[0]?.id ?? undefined,
-  );
+  const firstTab = selectedTab ?? defaultSelectedTab ?? tabs[0]?.id ?? undefined;
+  const [activeTab, setActiveTab] = React.useState<string | undefined>(firstTab);
 
   const onChange = React.useCallback(
     (id) => {
-      if (enableRouter || selectedTab) {
+      if (basePath || selectedTab) {
         onTabChange && onTabChange(id);
       } else {
         setActiveTab(id);
       }
     },
-    [selectedTab, enableRouter, onTabChange],
+    [selectedTab, basePath, onTabChange],
   );
 
   React.useEffect(() => {
-    if (!enableRouter && selectedTab != null) {
+    if (!basePath && selectedTab != null) {
       setActiveTab(selectedTab);
     }
-  }, [selectedTab, enableRouter]);
+  }, [selectedTab, basePath]);
 
   const contents = (selected: string | undefined) => (
     <DashboardFindNewName cardDefinitions={cardDefinitions} ref={dashboardRef}>
       <DashboardTabs
         onChange={onChange}
         selected={selected}
-        defaultSelected={enableRouter ? defaultSelectedTab : undefined}
+        defaultSelected={basePath ? firstTab : undefined}
       >
         {tabs.map((tab) => (
           <DashboardTab
@@ -102,7 +96,7 @@ const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
             eventKey={tab.id}
             id={tab.id}
             title={tab.label}
-            basePath={enableRouter ? basePath : undefined}
+            basePath={basePath}
           >
             {selected === tab.id ? (
               <DashboardGrid
@@ -142,8 +136,10 @@ const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
     </DashboardFindNewName>
   );
 
-  return enableRouter ? (
-    <DashboardRouter basePath={basePath}>{contents}</DashboardRouter>
+  return basePath ? (
+    <DashboardRouter basePath={basePath} defaultTab={firstTab}>
+      {contents}
+    </DashboardRouter>
   ) : (
     contents(activeTab)
   );

@@ -15,7 +15,7 @@ const App: React.FC = () => {
       <PageWrapper>
         <Routes>
           <Route
-            path={HackathonPage.DASHBOARD}
+            path={`${HackathonPage.DASHBOARD}/*`}
             // TODO make DashboardPage work with DashboardConfig
             element={<DashboardPage />}
           />

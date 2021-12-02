@@ -12,6 +12,7 @@ import * as React from 'react';
 import Dashboard, { DashboardAPI } from '../components/dashboard/Dashboard';
 import { cardDefinitions } from '../test/dashboard.test';
 import DashboardContext from '../utils/DashboardContext';
+import { HackathonPage } from './const';
 
 type DashboardPageProps = {};
 
@@ -46,6 +47,7 @@ const DashboardPage: React.FC<DashboardPageProps> = () => {
       <StackItem isFilled style={{ display: 'flex', overflow: 'hidden' }}>
         <Dashboard
           ref={dashboardProviderAPI}
+          // basePath={`${HackathonPage.DASHBOARD}/`}
           readonly={readonly}
           cardDefinitions={cardDefinitions}
           tabs={config.tabs}

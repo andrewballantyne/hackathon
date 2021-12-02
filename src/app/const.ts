@@ -1,4 +1,4 @@
 export enum HackathonPage {
-  DASHBOARD = '/',
+  DASHBOARD = '/dashboard',
   CATALOG = '/catalog',
 }
