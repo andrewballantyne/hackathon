@@ -16,7 +16,7 @@ type DashboardPageProps = {};
 
 const DashboardPage: React.FC<DashboardPageProps> = () => {
   const [tabEditorOpen, setTabEditorOpen] = React.useState(false);
-  const [readonly, setReadonly] = React.useState(true);
+  const [readonly, setReadonly] = React.useState(false);
 
   const dashboardProviderAPI = React.useRef<DashboardAPI>(null);
 
@@ -37,8 +37,8 @@ const DashboardPage: React.FC<DashboardPageProps> = () => {
                 </ToolbarItem>
                 <ToolbarItem>
                   <Switch
-                    label="Readonly"
-                    checked={readonly}
+                    label="Editable"
+                    checked={!readonly}
                     onChange={() => setReadonly((v) => !v)}
                   />
                 </ToolbarItem>
