@@ -12,7 +12,6 @@ import * as React from 'react';
 import Dashboard, { DashboardAPI } from '../components/dashboard/Dashboard';
 import { cardDefinitions } from '../test/dashboard.test';
 import DashboardContext from '../utils/DashboardContext';
-import { HackathonPage } from './const';
 
 type DashboardPageProps = {};
 
@@ -51,38 +50,6 @@ const DashboardPage: React.FC<DashboardPageProps> = () => {
           readonly={readonly}
           cardDefinitions={cardDefinitions}
           tabs={config.tabs}
-          // onCardChange={(id, config) => {
-          //   setConfig((c) =>
-          //     c.reduce((acc, d) => {
-          //       if (d.id === id) {
-          //         const i = d.cards.findIndex((c) => c.id === config.id);
-          //         const cards = [...d.cards.slice(0, i), config, ...d.cards.slice(i + 1)];
-          //         acc.push({
-          //           ...d,
-          //           cards,
-          //         });
-          //       } else {
-          //         acc.push(d);
-          //       }
-          //       return acc;
-          //     }, [] as DashboardTabConfig[]),
-          //   );
-          // }}
-          // onLayoutChange={(id, layout) => {
-          //   setConfig((c) =>
-          //     c.reduce((acc, d) => {
-          //       if (d.id === id) {
-          //         acc.push({
-          //           ...d,
-          //           layout,
-          //         });
-          //       } else {
-          //         acc.push(d);
-          //       }
-          //       return acc;
-          //     }, [] as DashboardTabConfig[]),
-          //   );
-          // }}
         />
       </StackItem>
     </Stack>

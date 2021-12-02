@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CardDefinition, DashboardTabConfig, Layout } from '../../types';
+import { CardDefinition, DashboardTabConfig } from '../../types';
 import DashboardTabs from './DashboardTabs';
 import DashboardFindNewName, { DashboardFindNewNameAPI } from './DashboardFindNewName';
 import DashboardTab from './DashboardTab';
@@ -8,12 +8,11 @@ import DashboardCardLoader from './DashboardCardLoader';
 import DashboardGrid from './DashboardGrid';
 import { DashboardCardFrame } from '../card-structure';
 import EditableWrapper from '../card-editor/EditableWrapper';
+import DashboardContext from '../../utils/DashboardContext';
 
 export type DashboardAPI = DashboardFindNewNameAPI;
 
 type Props = {
-  onLayoutChange?: (dashboardId: string, layout: Layout[]) => void;
-
   tabs: DashboardTabConfig[];
 
   // control selected tab
@@ -43,18 +42,10 @@ type Props = {
 };
 
 const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
-  {
-    basePath,
-    selectedTab,
-    defaultSelectedTab,
-    onTabChange,
-    tabs,
-    cardDefinitions,
-    onLayoutChange,
-    readonly,
-  },
+  { basePath, selectedTab, defaultSelectedTab, onTabChange, tabs, cardDefinitions, readonly },
   ref,
 ) => {
+  const { updateLayout } = React.useContext(DashboardContext);
   const dashboardRef = React.useRef<DashboardFindNewNameAPI>(null);
   const [dragId, setDragId] = React.useState<string | undefined>();
   const [resizeId, setResizeId] = React.useState<string | undefined>();
@@ -103,9 +94,7 @@ const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
                 readonly={readonly}
                 cols={tab.cols}
                 layout={tab.layout}
-                onLayoutChange={
-                  onLayoutChange ? (layout) => onLayoutChange(tab.id, layout) : undefined
-                }
+                onLayoutChange={(layout) => updateLayout(tab.id, layout)}
                 onDragStart={(id) => setDragId(id)}
                 onDragStop={() => setDragId(undefined)}
                 onResizeStart={(id) => setResizeId(id)}

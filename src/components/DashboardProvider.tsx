@@ -1,6 +1,6 @@
 import * as React from 'react';
 import CardEditorModal from './card-editor/CardEditorModal';
-import { CardConfig, CardDefinition, DashboardConfig, DashboardTabConfig } from '../types';
+import { CardConfig, CardDefinition, DashboardConfig, DashboardTabConfig, Layout } from '../types';
 import DashboardContext, { DashboardContextProps } from '../utils/DashboardContext';
 import useDashboardAdd from './useDashboardAdd';
 import { useNavigate } from 'react-router-dom';
@@ -37,9 +37,26 @@ const DashboardProvider: React.FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dashboardConfig]);
 
+  const updateLayout = React.useCallback((tabId: string, layout: Layout[]) => {
+    setDashboard((dc) => ({
+      ...dc,
+      tabs: dc.tabs.reduce((acc, tab) => {
+        if (tab.id === tabId) {
+          acc.push({
+            ...tab,
+            layout,
+          });
+        } else {
+          acc.push(tab);
+        }
+        return acc;
+      }, [] as DashboardTabConfig[]),
+    }));
+  }, []);
+
   return (
     <DashboardContext.Provider
-      value={{ dashboard: dashboardConfig, definitions, editCard, addCard }}
+      value={{ dashboard: dashboardConfig, definitions, editCard, addCard, updateLayout }}
     >
       {children}
       {editState ? (
