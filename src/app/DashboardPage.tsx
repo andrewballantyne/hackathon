@@ -9,16 +9,14 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import * as React from 'react';
-import Dashbboard, { DashboardAPI } from '../components/dashboard/Dashbboard';
+import Dashboard, { DashboardAPI } from '../components/dashboard/Dashboard';
 import { cardDefinitions } from '../test/dashboard.test';
-import { DashboardTabConfig } from '../types';
+import DashboardContext from '../utils/DashboardContext';
 
-type DashboardPageProps = {
-  config: DashboardTabConfig[];
-  setConfig: (tabs: DashboardTabConfig[]) => void;
-};
+type DashboardPageProps = {};
 
-const DashboardPage: React.FC<DashboardPageProps> = ({ config, setConfig }) => {
+const DashboardPage: React.FC<DashboardPageProps> = () => {
+  const { dashboard: config } = React.useContext(DashboardContext);
   const [readonly, setReadonly] = React.useState(false);
 
   const dashboardProviderAPI = React.useRef<DashboardAPI>(null);
@@ -46,11 +44,11 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ config, setConfig }) => {
         </Toolbar>
       </StackItem>
       <StackItem isFilled style={{ display: 'flex', overflow: 'hidden' }}>
-        <Dashbboard
+        <Dashboard
           ref={dashboardProviderAPI}
           readonly={readonly}
           cardDefinitions={cardDefinitions}
-          tabs={config}
+          tabs={config.tabs}
           // onCardChange={(id, config) => {
           //   setConfig((c) =>
           //     c.reduce((acc, d) => {

@@ -11,7 +11,7 @@ import {
   GalleryItem,
   PageSection,
 } from '@patternfly/react-core';
-import { cardDefinitions } from '../../test/dashboard.test';
+import DashboardContext from '../../utils/DashboardContext';
 import { CardDefinition } from '../../types';
 import CatalogCard from './CatalogCard';
 import CatalogSelectedSidebarContent from './CatalogSelectedSidebarContent';
@@ -23,15 +23,13 @@ const MAX_WIDTHS = {
 };
 const MIN_WIDTHS = MAX_WIDTHS;
 
-type CatalogProps = {
-  onNewCardInstance: (cardDefinition: CardDefinition) => void;
-};
+type CatalogProps = {};
 
-const Catalog: React.FC<CatalogProps> = ({ onNewCardInstance }) => {
+const Catalog: React.FC<CatalogProps> = (props) => {
   const [selectedId, setSelectedId] = React.useState<string>('');
+  const { definitions, addCard } = React.useContext(DashboardContext);
 
-  // TODO: did we want to pass in the definitions?
-  const selectedDefinition: CardDefinition | undefined = cardDefinitions.find(
+  const selectedDefinition: CardDefinition | undefined = definitions.find(
     ({ id }) => id === selectedId,
   );
   const isExpanded = !!selectedDefinition;
@@ -57,7 +55,7 @@ const Catalog: React.FC<CatalogProps> = ({ onNewCardInstance }) => {
         <DrawerContentBody className="catalog__content-body">
           <PageSection onClick={() => setSelectedId('')}>
             <Gallery hasGutter maxWidths={MAX_WIDTHS} minWidths={MIN_WIDTHS}>
-              {cardDefinitions.map((cardDefinition) => (
+              {definitions.map((cardDefinition) => (
                 <GalleryItem key={cardDefinition.id}>
                   <CatalogCard
                     cardDefinition={cardDefinition}
@@ -66,7 +64,7 @@ const Catalog: React.FC<CatalogProps> = ({ onNewCardInstance }) => {
                       setSelectedId(cardDefinition.id);
                     }}
                     isSelected={selectedId === cardDefinition.id}
-                    onDashboardAdd={onNewCardInstance}
+                    onDashboardAdd={({ id }) => addCard(id)}
                   />
                 </GalleryItem>
               ))}
