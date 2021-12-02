@@ -10,7 +10,7 @@ const MarkdownCardSettings: React.FC<CardSettingsProps<MarkdownCardData>> = ({
   <>
     <FormGroup label="Title" fieldId="markdown-card-title">
       <TextInput
-        value={data.title}
+        value={data.title ?? ''}
         type="text"
         id="markdown-card-title"
         name="title"
@@ -19,7 +19,7 @@ const MarkdownCardSettings: React.FC<CardSettingsProps<MarkdownCardData>> = ({
     </FormGroup>
     <FormGroup label="Markdown" isRequired fieldId="markdown-card-markdown">
       <TextArea
-        value={data.markdown}
+        value={data.markdown ?? ''}
         isRequired
         name="horizontal-form-exp"
         id="markdown-card-markdown"

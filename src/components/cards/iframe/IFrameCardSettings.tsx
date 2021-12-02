@@ -12,7 +12,7 @@ const IFrameCardSettings: React.FC<CardSettingsProps<IFrameCardData>> = ({ onCha
       helperText="Indicate its content to the user for accessibility."
     >
       <TextInput
-        value={data.title}
+        value={data.title ?? ''}
         isRequired
         type="text"
         id="iframe-card-title"
@@ -22,7 +22,7 @@ const IFrameCardSettings: React.FC<CardSettingsProps<IFrameCardData>> = ({ onCha
     </FormGroup>
     <FormGroup label="URL" isRequired fieldId="iframe-card-url">
       <TextInput
-        value={data.url}
+        value={data.url ?? ''}
         isRequired
         type="text"
         id="iframe-card-url"

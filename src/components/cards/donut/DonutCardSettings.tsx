@@ -7,7 +7,7 @@ const DonutCardSettings: React.FC<CardSettingsProps<DonutCardData>> = ({ onChang
   <>
     <FormGroup label="Title" isRequired fieldId="chart-donut-card-title">
       <TextInput
-        value={data.title}
+        value={data.title ?? ''}
         isRequired
         type="text"
         id="chart-donut-card-title"
@@ -17,7 +17,7 @@ const DonutCardSettings: React.FC<CardSettingsProps<DonutCardData>> = ({ onChang
     </FormGroup>
     <FormGroup label="Sub Title" fieldId="chart-donut-card-sub-title">
       <TextInput
-        value={data.subTitle}
+        value={data.subTitle ?? ''}
         type="text"
         id="chart-donut-card-sub-title"
         name="subTitle"
@@ -26,7 +26,7 @@ const DonutCardSettings: React.FC<CardSettingsProps<DonutCardData>> = ({ onChang
     </FormGroup>
     <FormGroup label="Unit" fieldId="chart-donut-card-unit">
       <TextInput
-        value={data.unit}
+        value={data.unit ?? ''}
         type="text"
         id="chart-donut-card-unit"
         name="unit"
@@ -35,7 +35,7 @@ const DonutCardSettings: React.FC<CardSettingsProps<DonutCardData>> = ({ onChang
     </FormGroup>
     <FormGroup label="Data" isRequired fieldId="chart-donut-card-data">
       <TextArea
-        value={JSON.stringify(data.data)}
+        value={data.data ? JSON.stringify(data.data) : ''}
         id="chart-donut-card-data"
         name="data"
         onChange={(d) => {
@@ -50,7 +50,7 @@ const DonutCardSettings: React.FC<CardSettingsProps<DonutCardData>> = ({ onChang
     </FormGroup>
     <FormGroup label="Aria Title" fieldId="chart-donut-card-aria-title">
       <TextInput
-        value={data.ariaTitle}
+        value={data.ariaTitle ?? ''}
         type="text"
         id="chart-donut-card-aria-title"
         name="ariaTitle"
@@ -59,7 +59,7 @@ const DonutCardSettings: React.FC<CardSettingsProps<DonutCardData>> = ({ onChang
     </FormGroup>
     <FormGroup label="Sub Title" fieldId="chart-donut-card-aria-desc">
       <TextArea
-        value={data.ariaDesc}
+        value={data.ariaDesc ?? ''}
         id="chart-donut-card-aria-desc"
         name="ariaDesc"
         onChange={(ariaDesc) => onChange({ ...data, ariaDesc })}
