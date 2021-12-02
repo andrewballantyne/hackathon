@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CardConfig, CardDefinition, DashboardTabConfig, Layout } from '../../types';
+import { CardDefinition, DashboardTabConfig, Layout } from '../../types';
 import DashboardTabs from './DashboardTabs';
 import DashboardFindNewName, { DashboardFindNewNameAPI } from './DashboardFindNewName';
 import DashboardTab from './DashboardTab';
@@ -12,7 +12,6 @@ import EditableWrapper from '../card-editor/EditableWrapper';
 export type DashboardAPI = DashboardFindNewNameAPI;
 
 type Props = {
-  onCardChange?: (dashboardId: string, config: CardConfig) => void;
   onLayoutChange?: (dashboardId: string, layout: Layout[]) => void;
 
   tabs: DashboardTabConfig[];
@@ -58,7 +57,6 @@ const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
     enableRouter,
     onLayoutChange,
     readonly,
-    onCardChange,
   },
   ref,
 ) => {
@@ -123,12 +121,7 @@ const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
                   <div key={card.id}>
                     <DashboardCardLoader config={card}>
                       {(Component) => (
-                        <EditableWrapper
-                          config={card}
-                          onCardChange={
-                            onCardChange ? (config) => onCardChange(tab.id, config) : undefined
-                          }
-                        >
+                        <EditableWrapper config={card}>
                           <DashboardCardFrame config={card} readonly={readonly}>
                             <Component
                               data={card.data}

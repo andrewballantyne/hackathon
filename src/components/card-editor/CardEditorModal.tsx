@@ -2,17 +2,28 @@ import { Button, Modal, ModalVariant } from '@patternfly/react-core';
 import * as React from 'react';
 import { CardConfig } from '../../types';
 import { useCardDefinition } from '../../utils/card-utils';
+import DashboardContext from '../../utils/DashboardContext';
 import CardEditor from './CardEditor';
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
   onSave: (config: CardConfig, tabId: string) => void;
-  config: CardConfig;
+  cardConfig: CardConfig;
 };
-const CardEditorModal: React.FC<Props> = ({ config, isOpen, onClose, onSave }) => {
-  const def = useCardDefinition(config.type);
-  const [newConfig, setConfig] = React.useState(config);
+const CardEditorModal: React.FC<Props> = ({ cardConfig, isOpen, onClose, onSave }) => {
+  const { dashboard } = React.useContext(DashboardContext);
+  // TODO if no tabs exist, support adding a dashboard tab
+  const tabId =
+    dashboard.tabs.find((tab) => tab.cards.find((card) => card.id === cardConfig.id))?.id ??
+    dashboard.tabs[0]?.id ??
+    '';
+  const def = useCardDefinition(cardConfig.type);
+  const [saveState, setSaveState] = React.useState<{
+    cardConfig: CardConfig;
+    tabId: string;
+  }>({ cardConfig, tabId });
+
   return (
     <Modal
       variant={ModalVariant.large}
@@ -25,8 +36,7 @@ const CardEditorModal: React.FC<Props> = ({ config, isOpen, onClose, onSave }) =
           key="save"
           variant="primary"
           onClick={() => {
-            // TODO pass in the new tabId
-            onSave(newConfig, '');
+            onSave(saveState.cardConfig, saveState.tabId);
             onClose();
           }}
         >
@@ -38,9 +48,14 @@ const CardEditorModal: React.FC<Props> = ({ config, isOpen, onClose, onSave }) =
       ]}
     >
       <CardEditor
-        // TODO store the tabId
-        onChange={(c, tabId) => setConfig(c)}
-        config={newConfig}
+        onChange={(cardConfig, tabId) =>
+          setSaveState({
+            cardConfig,
+            tabId,
+          })
+        }
+        config={saveState.cardConfig}
+        tabId={saveState.tabId}
       />
     </Modal>
   );

@@ -4,7 +4,7 @@ import { CardConfig, CardDefinition, DashboardConfig } from '../types';
 type Props = {
   dashboard: DashboardConfig;
   definitions: CardDefinition[];
-  editCard: (config: CardConfig, onSave: (config: CardConfig) => void) => void;
+  editCard: (config: CardConfig) => void;
 };
 
 const DashboardContext = React.createContext<Props>({

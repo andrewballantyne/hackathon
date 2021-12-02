@@ -1,34 +1,22 @@
 import React from 'react';
 import { CardConfig } from '../../types';
-import CardEditorModal from './CardEditorModal';
-
+import DashboardContext from '../../utils/DashboardContext';
 type Props = {
   config: CardConfig;
   readonly?: boolean;
   children: React.ReactNode;
-  onCardChange?: (config: CardConfig) => void;
 };
 
-const EditableWrapper: React.FC<Props> = ({ config, readonly, onCardChange, children }) => {
-  const [edit, setEdit] = React.useState(false);
+const EditableWrapper: React.FC<Props> = ({ config, readonly, children }) => {
+  const { editCard } = React.useContext(DashboardContext);
   return (
-    <>
-      <div
-        style={{ height: '100%', display: 'flex', flexDirection: 'column', flexGrow: 1 }}
-        // TODO this is a simple solution to enter edit mode for now
-        onDoubleClick={!readonly ? () => setEdit(true) : undefined}
-      >
-        {children}
-      </div>
-      {edit ? (
-        <CardEditorModal
-          isOpen
-          config={config}
-          onClose={() => setEdit(false)}
-          onSave={(c) => onCardChange && onCardChange(c)}
-        />
-      ) : undefined}
-    </>
+    <div
+      style={{ height: '100%', display: 'flex', flexDirection: 'column', flexGrow: 1 }}
+      // TODO this is a simple solution to enter edit mode for now
+      onDoubleClick={!readonly ? () => editCard(config) : undefined}
+    >
+      {children}
+    </div>
   );
 };
 
