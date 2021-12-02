@@ -14,6 +14,13 @@ const definition: CardDefinition<DonutCardData> = {
     import('./DonutCardSettings' /* webpackChunkName: "pf-dashboard-card-donut" */),
   contentComponent: () =>
     import('./DonutCardContent' /* webpackChunkName: "pf-dashboard-card-donut" */),
+  defaultData: {
+    data: [
+      { x: 'Cats', y: 35 },
+      { x: 'Dogs', y: 55 },
+      { x: 'Birds', y: 10 },
+    ],
+  },
 };
 
 export default definition;

@@ -11,7 +11,7 @@ const DonutCardContent: React.FC<CardProps<DonutCardData>> = ({
     ariaTitle={ariaTitle}
     constrainToVisibleArea={true}
     data={data}
-    labels={({ datum }) => `${datum.x}: ${datum.y}${unit}`}
+    labels={({ datum }) => `${datum.x}: ${datum.y}${unit ?? ''}`}
     subTitle={subTitle}
     title={title}
   />

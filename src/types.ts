@@ -27,7 +27,7 @@ export type CardDefinition<D = any> = {
   description: string;
   icon: string | React.ReactElement;
   images?: string[];
-  defaultData?: D;
+  defaultData?: Partial<D>;
 };
 
 export type CardConfig<D = any> = {
