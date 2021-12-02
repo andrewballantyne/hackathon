@@ -51,9 +51,23 @@ const DashboardProvider: React.FC<Props> = ({
     }));
   }, []);
 
+  const updateTabs = React.useCallback((newTabs: DashboardTabConfig[]) => {
+    setDashboard((dc) => ({
+      ...dc,
+      tabs: newTabs,
+    }));
+  }, []);
+
   return (
     <DashboardContext.Provider
-      value={{ dashboard: dashboardConfig, definitions, editCard, addCard, updateLayout }}
+      value={{
+        dashboard: dashboardConfig,
+        definitions,
+        editCard,
+        addCard,
+        updateLayout,
+        updateTabs,
+      }}
     >
       {children}
       {editState ? (
