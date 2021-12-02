@@ -4,8 +4,12 @@ import { CardConfig, CardDefinition, DashboardConfig, DashboardTabConfig, Layout
 export type DashboardContextProps = {
   dashboard: DashboardConfig;
   definitions: CardDefinition[];
-  addCard: (cardType: string, defaults?: Partial<Omit<CardConfig, 'type'>>) => void;
-  editCard: (config: CardConfig) => void;
+  addCard: (
+    cardType: string,
+    defaults?: Partial<Omit<CardConfig, 'type'>>,
+    onSave?: (config: CardConfig, tabId: string) => void,
+  ) => void;
+  editCard: (config: CardConfig, onSave?: (config: CardConfig, tabId: string) => void) => void;
   updateLayout: (tabId: string, layout: Layout[]) => void;
   updateTabs: (newTabs: DashboardTabConfig[]) => void;
 };

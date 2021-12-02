@@ -11,6 +11,7 @@ import {
 import * as React from 'react';
 import Dashboard, { DashboardAPI } from '../components/dashboard/Dashboard';
 import TabEditorModal from '../components/tab-editor/TabEditorModal';
+import { HackathonPage } from './const';
 
 type DashboardPageProps = {};
 
@@ -48,7 +49,7 @@ const DashboardPage: React.FC<DashboardPageProps> = () => {
         </StackItem>
         <StackItem isFilled style={{ display: 'flex', overflow: 'hidden' }}>
           <Dashboard
-            // basePath={`${HackathonPage.DASHBOARD}/`}
+            basePath={`${HackathonPage.DASHBOARD}/`}
             ref={dashboardProviderAPI}
             readonly={readonly}
           />

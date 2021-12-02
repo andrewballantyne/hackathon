@@ -12,7 +12,7 @@ import {
   PageSection,
 } from '@patternfly/react-core';
 import DashboardContext from '../../utils/DashboardContext';
-import { CardDefinition } from '../../types';
+import { CardConfig, CardDefinition } from '../../types';
 import CatalogCard from './CatalogCard';
 import CatalogSelectedSidebarContent from './CatalogSelectedSidebarContent';
 
@@ -23,9 +23,11 @@ const MAX_WIDTHS = {
 };
 const MIN_WIDTHS = MAX_WIDTHS;
 
-type CatalogProps = {};
+type CatalogProps = {
+  onCardAdded?: (config: CardConfig, tabId: string) => void;
+};
 
-const Catalog: React.FC<CatalogProps> = (props) => {
+const Catalog: React.FC<CatalogProps> = ({ onCardAdded }) => {
   const [selectedId, setSelectedId] = React.useState<string>('');
   const { definitions, addCard } = React.useContext(DashboardContext);
 
@@ -65,7 +67,7 @@ const Catalog: React.FC<CatalogProps> = (props) => {
                     }}
                     isSelected={selectedId === cardDefinition.id}
                     onDashboardAdd={({ id, defaultData }) =>
-                      addCard(id, defaultData ? { data: defaultData } : undefined)
+                      addCard(id, defaultData ? { data: defaultData } : undefined, onCardAdded)
                     }
                   />
                 </GalleryItem>

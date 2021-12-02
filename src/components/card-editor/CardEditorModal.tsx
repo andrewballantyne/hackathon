@@ -9,7 +9,11 @@ import CardEditor from './CardEditor';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (config: CardConfig, tabId: string) => void;
+  onSave: (
+    config: CardConfig,
+    tabId: string,
+    onCardAdd?: (config: CardConfig, tabId: string) => void,
+  ) => void;
   cardConfig: CardConfig;
 };
 const CardEditorModal: React.FC<Props> = ({ cardConfig, isOpen, onClose, onSave }) => {
@@ -28,6 +32,7 @@ const CardEditorModal: React.FC<Props> = ({ cardConfig, isOpen, onClose, onSave 
   return (
     <Modal
       variant={ModalVariant.large}
+      aria-label={def.label}
       header={<DefinitionTitle definition={def} size="2xl" />}
       isOpen={isOpen}
       onClose={onClose}

@@ -17,13 +17,17 @@ const DashboardProvider: React.FC<Props> = ({
   onDashboardChange,
 }) => {
   const [dashboardConfig, setDashboard] = React.useState<DashboardConfig>(dashboard);
-  const [editState, setEditState] = React.useState<
-    Parameters<DashboardContextProps['editCard']>[0] | undefined
-  >();
+  const [editState, setEditState] = React.useState<{
+    config: Parameters<DashboardContextProps['editCard']>[0];
+    onSave: Parameters<DashboardContextProps['editCard']>[1];
+  }>();
 
-  const editCard = React.useCallback<DashboardContextProps['editCard']>((config: CardConfig) => {
-    setEditState(config);
-  }, []);
+  const editCard = React.useCallback<DashboardContextProps['editCard']>(
+    (config: CardConfig, onSave?: (config: CardConfig, tabId: string) => void) => {
+      setEditState({ config, onSave });
+    },
+    [],
+  );
   const addCard = useDashboardAdd(editCard);
 
   React.useEffect(() => {
@@ -73,7 +77,7 @@ const DashboardProvider: React.FC<Props> = ({
       {editState ? (
         <CardEditorModal
           isOpen
-          cardConfig={editState}
+          cardConfig={editState.config}
           onClose={() => setEditState(undefined)}
           onSave={(cardConfig, tabId) => {
             // TODO delete the card and layout from the OLD tab if tabId has changed
@@ -103,6 +107,7 @@ const DashboardProvider: React.FC<Props> = ({
                 return acc;
               }, [] as DashboardTabConfig[]),
             }));
+            editState.onSave && editState.onSave(cardConfig, tabId);
           }}
         />
       ) : undefined}

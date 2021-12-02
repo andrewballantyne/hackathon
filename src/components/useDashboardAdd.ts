@@ -11,14 +11,14 @@ export const getRandomChars = (len = 6): string => {
 const useDashboardAdd = (
   editCard: DashboardContextProps['editCard'],
 ): DashboardContextProps['addCard'] => {
-  return (cardType, cardDefaults) => {
+  return (cardType, cardDefaults, onCardAdded) => {
     let newConfig: CardConfig = {
       data: {},
       id: `cardType-${getRandomChars()}`,
       ...cardDefaults,
       type: cardType,
     };
-    editCard(newConfig);
+    editCard(newConfig, onCardAdded);
   };
 };
 
