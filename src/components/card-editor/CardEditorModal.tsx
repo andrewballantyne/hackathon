@@ -7,7 +7,7 @@ import CardEditor from './CardEditor';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (config: CardConfig) => void;
+  onSave: (config: CardConfig, tabId: string) => void;
   config: CardConfig;
 };
 const CardEditorModal: React.FC<Props> = ({ config, isOpen, onClose, onSave }) => {
@@ -25,7 +25,8 @@ const CardEditorModal: React.FC<Props> = ({ config, isOpen, onClose, onSave }) =
           key="save"
           variant="primary"
           onClick={() => {
-            onSave(newConfig);
+            // TODO pass in the new tabId
+            onSave(newConfig, '');
             onClose();
           }}
         >
@@ -36,7 +37,11 @@ const CardEditorModal: React.FC<Props> = ({ config, isOpen, onClose, onSave }) =
         </Button>,
       ]}
     >
-      <CardEditor onChange={setConfig} config={newConfig} />
+      <CardEditor
+        // TODO store the tabId
+        onChange={(c, tabId) => setConfig(c)}
+        config={newConfig}
+      />
     </Modal>
   );
 };

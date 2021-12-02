@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { CardConfig, CardDefinition, DashboardConfig, Layout } from '../../types';
+import { CardConfig, CardDefinition, DashboardTabConfig, Layout } from '../../types';
 import DashboardTabs from './DashboardTabs';
-import Dashboard, { DashboardAPI } from './Dashboard';
+import DashboardFindNewName, { DashboardFindNewNameAPI } from './DashboardFindNewName';
 import DashboardTab from './DashboardTab';
 import DashboardRouter from './DashboardRouter';
 import DashboardCardLoader from './DashboardCardLoader';
@@ -9,13 +9,13 @@ import DashboardGrid from './DashboardGrid';
 import { DashboardCardFrame } from '../card-structure';
 import EditableWrapper from '../card-editor/EditableWrapper';
 
-export type DashboardProviderAPI = DashboardAPI;
+export type DashboardAPI = DashboardFindNewNameAPI;
 
 type Props = {
   onCardChange?: (dashboardId: string, config: CardConfig) => void;
   onLayoutChange?: (dashboardId: string, layout: Layout[]) => void;
 
-  dashboards: DashboardConfig[];
+  tabs: DashboardTabConfig[];
 
   // control selected tab
   // alternatively supply a baseURL and control the tabs via routes
@@ -47,13 +47,13 @@ type Props = {
   readonly?: boolean;
 };
 
-const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Props> = (
+const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
   {
     basePath = '/',
     selectedTab,
     defaultSelectedTab,
     onTabChange,
-    dashboards,
+    tabs,
     cardDefinitions,
     enableRouter,
     onLayoutChange,
@@ -62,7 +62,7 @@ const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Pr
   },
   ref,
 ) => {
-  const dashboardRef = React.useRef<DashboardAPI>(null);
+  const dashboardRef = React.useRef<DashboardFindNewNameAPI>(null);
   const [dragId, setDragId] = React.useState<string | undefined>();
   const [resizeId, setResizeId] = React.useState<string | undefined>();
 
@@ -71,7 +71,7 @@ const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Pr
   }));
 
   const [activeTab, setActiveTab] = React.useState<string | undefined>(
-    selectedTab ?? defaultSelectedTab ?? dashboards[0]?.id ?? undefined,
+    selectedTab ?? defaultSelectedTab ?? tabs[0]?.id ?? undefined,
   );
 
   const onChange = React.useCallback(
@@ -92,43 +92,41 @@ const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Pr
   }, [selectedTab, enableRouter]);
 
   const contents = (selected: string | undefined) => (
-    <Dashboard cardDefinitions={cardDefinitions} ref={dashboardRef}>
+    <DashboardFindNewName cardDefinitions={cardDefinitions} ref={dashboardRef}>
       <DashboardTabs
         onChange={onChange}
         selected={selected}
         defaultSelected={enableRouter ? defaultSelectedTab : undefined}
       >
-        {dashboards.map((dashboard) => (
+        {tabs.map((tab) => (
           <DashboardTab
-            key={dashboard.id}
-            eventKey={dashboard.id}
-            id={dashboard.id}
-            title={dashboard.label}
+            key={tab.id}
+            eventKey={tab.id}
+            id={tab.id}
+            title={tab.label}
             basePath={enableRouter ? basePath : undefined}
           >
-            {selected === dashboard.id ? (
+            {selected === tab.id ? (
               <DashboardGrid
                 readonly={readonly}
-                cols={dashboard.cols}
-                layout={dashboard.layout}
+                cols={tab.cols}
+                layout={tab.layout}
                 onLayoutChange={
-                  onLayoutChange ? (layout) => onLayoutChange(dashboard.id, layout) : undefined
+                  onLayoutChange ? (layout) => onLayoutChange(tab.id, layout) : undefined
                 }
                 onDragStart={(id) => setDragId(id)}
                 onDragStop={() => setDragId(undefined)}
                 onResizeStart={(id) => setResizeId(id)}
                 onResizeStop={() => setResizeId(undefined)}
               >
-                {dashboard.cards.map((card) => (
+                {tab.cards.map((card) => (
                   <div key={card.id}>
                     <DashboardCardLoader config={card}>
                       {(Component) => (
                         <EditableWrapper
                           config={card}
                           onCardChange={
-                            onCardChange
-                              ? (config) => onCardChange(dashboard.id, config)
-                              : undefined
+                            onCardChange ? (config) => onCardChange(tab.id, config) : undefined
                           }
                         >
                           <DashboardCardFrame config={card} readonly={readonly}>
@@ -148,7 +146,7 @@ const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Pr
           </DashboardTab>
         ))}
       </DashboardTabs>
-    </Dashboard>
+    </DashboardFindNewName>
   );
 
   return enableRouter ? (
@@ -158,4 +156,4 @@ const DashboardProvider: React.ForwardRefRenderFunction<DashboardProviderAPI, Pr
   );
 };
 
-export default React.forwardRef(DashboardProvider);
+export default React.forwardRef(Dashboard);

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { CardDefinition } from '../../types';
-import DashboardContext from '../../utils/DashboardContext';
+import OldDashboardContext from '../../utils/OldDashboardContext';
 
 import './Dashboard.scss';
 import { useFullscreen } from '../../utils/fullscreen';
 
-export type DashboardAPI = {
+export type DashboardFindNewNameAPI = {
   fullscreenToggle(): void;
 };
 
@@ -14,7 +14,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
+const Dashboard: React.ForwardRefRenderFunction<DashboardFindNewNameAPI, Props> = (
   { cardDefinitions, children },
   ref,
 ) => {
@@ -35,9 +35,9 @@ const Dashboard: React.ForwardRefRenderFunction<DashboardAPI, Props> = (
 
   return (
     <div className="pf-dashboard" ref={fullscreenRef}>
-      <DashboardContext.Provider value={{ idToCardDefinition, isFullscreen }}>
+      <OldDashboardContext.Provider value={{ idToCardDefinition, isFullscreen }}>
         {children}
-      </DashboardContext.Provider>
+      </OldDashboardContext.Provider>
     </div>
   );
 };

@@ -8,20 +8,20 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import React, { Dispatch, SetStateAction } from 'react';
-import DashboardProvider, { DashboardProviderAPI } from '../components/dashboard/DashboardProvider';
+import * as React from 'react';
+import Dashbboard, { DashboardAPI } from '../components/dashboard/Dashbboard';
 import { cardDefinitions } from '../test/dashboard.test';
-import { DashboardConfig } from '../types';
+import { DashboardTabConfig } from '../types';
 
 type DashboardPageProps = {
-  config: DashboardConfig[];
-  setConfig: Dispatch<SetStateAction<DashboardConfig[]>>;
+  config: DashboardTabConfig[];
+  setConfig: (tabs: DashboardTabConfig[]) => void;
 };
 
 const DashboardPage: React.FC<DashboardPageProps> = ({ config, setConfig }) => {
   const [readonly, setReadonly] = React.useState(false);
 
-  const dashboardProviderAPI = React.useRef<DashboardProviderAPI>(null);
+  const dashboardProviderAPI = React.useRef<DashboardAPI>(null);
 
   return (
     <Stack style={{ flexGrow: 1 }}>
@@ -46,43 +46,43 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ config, setConfig }) => {
         </Toolbar>
       </StackItem>
       <StackItem isFilled style={{ display: 'flex', overflow: 'hidden' }}>
-        <DashboardProvider
+        <Dashbboard
           ref={dashboardProviderAPI}
           readonly={readonly}
           cardDefinitions={cardDefinitions}
-          dashboards={config}
-          onCardChange={(id, config) => {
-            setConfig((c) =>
-              c.reduce((acc, d) => {
-                if (d.id === id) {
-                  const i = d.cards.findIndex((c) => c.id === config.id);
-                  const cards = [...d.cards.slice(0, i), config, ...d.cards.slice(i + 1)];
-                  acc.push({
-                    ...d,
-                    cards,
-                  });
-                } else {
-                  acc.push(d);
-                }
-                return acc;
-              }, [] as DashboardConfig[]),
-            );
-          }}
-          onLayoutChange={(id, layout) => {
-            setConfig((c) =>
-              c.reduce((acc, d) => {
-                if (d.id === id) {
-                  acc.push({
-                    ...d,
-                    layout,
-                  });
-                } else {
-                  acc.push(d);
-                }
-                return acc;
-              }, [] as DashboardConfig[]),
-            );
-          }}
+          tabs={config}
+          // onCardChange={(id, config) => {
+          //   setConfig((c) =>
+          //     c.reduce((acc, d) => {
+          //       if (d.id === id) {
+          //         const i = d.cards.findIndex((c) => c.id === config.id);
+          //         const cards = [...d.cards.slice(0, i), config, ...d.cards.slice(i + 1)];
+          //         acc.push({
+          //           ...d,
+          //           cards,
+          //         });
+          //       } else {
+          //         acc.push(d);
+          //       }
+          //       return acc;
+          //     }, [] as DashboardTabConfig[]),
+          //   );
+          // }}
+          // onLayoutChange={(id, layout) => {
+          //   setConfig((c) =>
+          //     c.reduce((acc, d) => {
+          //       if (d.id === id) {
+          //         acc.push({
+          //           ...d,
+          //           layout,
+          //         });
+          //       } else {
+          //         acc.push(d);
+          //       }
+          //       return acc;
+          //     }, [] as DashboardTabConfig[]),
+          //   );
+          // }}
         />
       </StackItem>
     </Stack>

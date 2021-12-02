@@ -40,7 +40,7 @@ export type CardConfig<D = any> = {
   data: D;
 };
 
-export type DashboardConfig = {
+export type DashboardTabConfig = {
   id: string;
   label: string;
   cards: CardConfig[];
@@ -50,8 +50,8 @@ export type DashboardConfig = {
   readOnly?: boolean;
 };
 
-export type Config = {
-  dashboards: DashboardConfig[];
+export type DashboardConfig = {
+  tabs: DashboardTabConfig[];
   fullscreen?: {
     hideTabs?: boolean;
     cycle?: boolean;

@@ -1,14 +1,16 @@
 import * as React from 'react';
-import { CardDefinition } from '../types';
+import { CardConfig, CardDefinition, DashboardConfig } from '../types';
 
-type ContextProps = {
-  idToCardDefinition: { [id: string]: CardDefinition };
-  isFullscreen: boolean;
+type Props = {
+  dashboard: DashboardConfig;
+  definitions: CardDefinition[];
+  editCard: (config: CardConfig, onSave: (config: CardConfig) => void) => void;
 };
 
-const DashboardContext = React.createContext<ContextProps>({
-  idToCardDefinition: {},
-  isFullscreen: false,
+const DashboardContext = React.createContext<Props>({
+  dashboard: { tabs: [] },
+  definitions: [],
+  editCard: () => {},
 });
 
 export default DashboardContext;

@@ -1,13 +1,15 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Catalog from '../components/catalog/Catalog';
-import { dashboards } from '../test/dashboard.test';
-import { CardConfig, CatalogCardDefinition } from '../types';
+import { dashboard } from '../test/dashboard.test';
+import { CardConfig, CatalogCardDefinition, DashboardConfig } from '../types';
 import { Pages } from './const';
 import NotFound from './NotFound';
 import DashboardPage from './DashboardPage';
 import PageWrapper from './PageWrapper';
 import CardEditorModal from '../components/card-editor/CardEditorModal';
+import DashboardProvider from '../components/DashboardProvider';
+import definitions from '../components/cards/definitions';
 
 const createBasicCardConfig = (cardDefinition: CatalogCardDefinition): CardConfig => {
   console.debug('converting cardDefinition', cardDefinition);
@@ -36,7 +38,7 @@ const createBasicCardConfig = (cardDefinition: CatalogCardDefinition): CardConfi
 };
 
 const App: React.FC = () => {
-  const [config, setConfig] = React.useState(dashboards);
+  const [config, setConfig] = React.useState<DashboardConfig>(dashboard);
   const [inFlightCardConfig, setInFlightCardConfig] = React.useState<CardConfig | null>(null);
 
   const updateConfig = React.useCallback(
@@ -48,33 +50,41 @@ const App: React.FC = () => {
   );
 
   return (
-    <PageWrapper>
-      <Routes>
-        <Route
-          path={Pages.DASHBOARD}
-          element={<DashboardPage config={config} setConfig={setConfig} />}
-        />
-        <Route
-          path={Pages.CATALOG}
-          element={
-            <Catalog
-              onNewCardInstance={(cardDefinition) =>
-                setInFlightCardConfig(createBasicCardConfig(cardDefinition))
-              }
-            />
-          }
-        />
-        <Route path="/*" element={<NotFound />} />
-      </Routes>
-      {!!inFlightCardConfig && config === null /* TODO: Fix disable */ && (
-        <CardEditorModal
-          isOpen={!!inFlightCardConfig}
-          onClose={() => setInFlightCardConfig(null)}
-          onSave={(cardConfig) => updateConfig(cardConfig)}
-          config={inFlightCardConfig}
-        />
-      )}
-    </PageWrapper>
+    <DashboardProvider definitions={definitions} dashboard={config}>
+      <PageWrapper>
+        <Routes>
+          <Route
+            path={Pages.DASHBOARD}
+            // TODO make DashboardPage work with DashboardConfig
+            element={
+              <DashboardPage
+                config={config.tabs}
+                setConfig={(tabs) => setConfig((c) => ({ ...c, tabs }))}
+              />
+            }
+          />
+          <Route
+            path={Pages.CATALOG}
+            element={
+              <Catalog
+                onNewCardInstance={(cardDefinition) =>
+                  setInFlightCardConfig(createBasicCardConfig(cardDefinition))
+                }
+              />
+            }
+          />
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
+        {!!inFlightCardConfig && config === null /* TODO: Fix disable */ && (
+          <CardEditorModal
+            isOpen={!!inFlightCardConfig}
+            onClose={() => setInFlightCardConfig(null)}
+            onSave={(cardConfig) => updateConfig(cardConfig)}
+            config={inFlightCardConfig}
+          />
+        )}
+      </PageWrapper>
+    </DashboardProvider>
   );
 };
 

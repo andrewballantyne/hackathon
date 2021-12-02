@@ -4,7 +4,7 @@ import GridLayout, { WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { Layout } from '../../types';
-import DashboardContext from '../../utils/DashboardContext';
+import OldDashboardContext from '../../utils/OldDashboardContext';
 
 const GridLayoutWithWidth = WidthProvider(GridLayout);
 
@@ -34,7 +34,7 @@ const DashboardGrid: React.FC<Props> = ({
   onResizeStart,
   onResizeStop,
 }) => {
-  const { isFullscreen } = React.useContext(DashboardContext);
+  const { isFullscreen } = React.useContext(OldDashboardContext);
   const editable = !readonly && !isFullscreen;
 
   // FIXME when exiting out of fullscreen mode, even though editable === true,

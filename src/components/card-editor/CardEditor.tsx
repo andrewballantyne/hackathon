@@ -15,7 +15,7 @@ import CardEditorDefaultSettings from './CardEditorDefaultSettings';
 import './CardEditor.scss';
 
 type Props = {
-  onChange: (config: CardConfig) => void;
+  onChange: (config: CardConfig, tabId: string) => void;
   config: CardConfig;
 };
 
@@ -31,8 +31,17 @@ const CardEditor: React.FC<Props> = ({ config, onChange }) => (
         >
           <DrawerHead>
             <Form>
-              <CardEditorDefaultSettings config={config} onChange={onChange} />
-              <CardEditorSettings config={config} onChange={onChange} />
+              <CardEditorDefaultSettings
+                config={config}
+                // TODO store tabId in state
+                onTabChange={(tabId) => onChange(config, tabId)}
+                onChange={(c) => onChange(c, '')}
+              />
+              <CardEditorSettings
+                config={config}
+                // TODO get tabId from state
+                onChange={(c) => onChange(c, '')}
+              />
             </Form>
           </DrawerHead>
         </DrawerPanelContent>
