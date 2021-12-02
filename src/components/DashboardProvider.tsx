@@ -87,7 +87,7 @@ const DashboardProvider: React.FC<Props> = ({
                     acc.push({
                       ...tab,
                       cards: [...tab.cards, cardConfig],
-                      layout: [...tab.layout, { i: cardConfig.id, x: 0, y: 0, w: 1, h: 1 }],
+                      layout: [...tab.layout, { i: cardConfig.id, x: 0, y: 0, w: 3, h: 2 }],
                     });
                   } else {
                     // Edit
