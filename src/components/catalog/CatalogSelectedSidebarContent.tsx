@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { Stack, StackItem, Title } from '@patternfly/react-core';
 import { CardDefinition } from '../../types';
-import { Stack, StackItem, Title, TitleSizes } from '@patternfly/react-core';
+import { DefinitionTitle } from '../common';
 import CatalogImage from './CatalogImage';
-import CatalogIcon from './CatalogIcon';
 
 type CatalogSelectedSidebarContentProps = {
   selectedDefinition?: CardDefinition;
@@ -13,16 +13,14 @@ const CatalogSelectedSidebarContent: React.FC<CatalogSelectedSidebarContentProps
 }) => {
   if (!selectedDefinition) return null;
 
-  const { label, description, icon, images } = selectedDefinition;
+  const { description, images } = selectedDefinition;
 
   const validImages = images ? images.filter((src) => !!src) : [];
 
   return (
     <Stack hasGutter>
       <StackItem>
-        <Title headingLevel="h2" size={TitleSizes['3xl']}>
-          <CatalogIcon icon={icon} /> {label}
-        </Title>
+        <DefinitionTitle definition={selectedDefinition} size="3xl" />
       </StackItem>
       <StackItem>
         <p>{description}</p>

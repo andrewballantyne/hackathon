@@ -15,7 +15,7 @@ import {
 import OutlinedFileImage from '@patternfly/react-icons/dist/js/icons/outlined-file-image-icon';
 import PlusIcon from '@patternfly/react-icons/dist/js/icons/plus-icon';
 import { CardDefinition } from '../../types';
-import CatalogIcon from './CatalogIcon';
+import { DefinitionTitle } from '../common';
 import CatalogImageDeck from './CatalogImageDeck';
 
 import './CatalogCard.scss';
@@ -33,9 +33,7 @@ const CatalogCard: React.FC<CatalogCardProps> = ({
   onSelect,
   onDashboardAdd,
 }) => {
-  const { label, icon, images } = cardDefinition;
-
-  const hasImages = images && images.filter((v) => !!v).length > 0;
+  const images = cardDefinition.images?.filter((v) => !!v) ?? [];
 
   return (
     <Card
@@ -47,7 +45,7 @@ const CatalogCard: React.FC<CatalogCardProps> = ({
     >
       <CardHeader>
         <CardHeaderMain>
-          <CatalogIcon icon={icon} /> {label}
+          <DefinitionTitle definition={cardDefinition} size="md" />
         </CardHeaderMain>
         <CardActions>
           <Button
@@ -65,7 +63,7 @@ const CatalogCard: React.FC<CatalogCardProps> = ({
       </CardHeader>
       <CardBody className="catalog-card__card-body">
         <Bullseye>
-          {hasImages ? (
+          {images.length > 0 ? (
             <CatalogImageDeck images={images} />
           ) : (
             <EmptyState variant={EmptyStateVariant.xs}>

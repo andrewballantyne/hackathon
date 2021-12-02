@@ -12,8 +12,11 @@ type CatalogImageDeckProps = {
 
 const CatalogImageDeck: React.FC<CatalogImageDeckProps> = ({ images }) => {
   const [index, setIndex] = React.useState(0);
+
+  if (!images) return null;
+
   const min = 0;
-  const max = images ? images.length - 1 : 0;
+  const max = images.length - 1;
 
   return (
     <Split className="catalog-image-deck">

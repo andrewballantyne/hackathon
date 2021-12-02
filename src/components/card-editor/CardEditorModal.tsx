@@ -1,5 +1,6 @@
-import { Button, Modal, ModalVariant } from '@patternfly/react-core';
+import { Button, Modal, ModalVariant, Title } from '@patternfly/react-core';
 import * as React from 'react';
+import DefinitionTitle from '../common/DefinitionTitle';
 import { CardConfig } from '../../types';
 import { useCardDefinition } from '../../utils/card-utils';
 import DashboardContext from '../../utils/DashboardContext';
@@ -27,7 +28,7 @@ const CardEditorModal: React.FC<Props> = ({ cardConfig, isOpen, onClose, onSave 
   return (
     <Modal
       variant={ModalVariant.large}
-      title={def.label}
+      header={<DefinitionTitle definition={def} size="2xl" />}
       isOpen={isOpen}
       onClose={onClose}
       showClose={false}

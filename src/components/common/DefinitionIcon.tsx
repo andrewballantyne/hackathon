@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { CardDefinition } from '../../types';
 
+import './DefinitionIcon.scss';
+
 type CatalogIconProps = {
   icon: CardDefinition['icon'];
 };
 
-const CatalogIcon: React.FC<CatalogIconProps> = ({ icon }) => {
+const DefinitionIcon: React.FC<CatalogIconProps> = ({ icon }) => {
   if (!icon) return null;
 
   if (typeof icon === 'string') {
@@ -15,4 +17,4 @@ const CatalogIcon: React.FC<CatalogIconProps> = ({ icon }) => {
   return icon;
 };
 
-export default CatalogIcon;
+export default DefinitionIcon;
