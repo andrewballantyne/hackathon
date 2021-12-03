@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import Catalog from '../components/catalog/Catalog';
 import { dashboard } from '../test/dashboard.test';
 import { HackathonPage } from './const';
@@ -24,6 +24,8 @@ const App: React.FC = () => {
               />
             }
           />
+
+          <Route path="/" element={<Navigate replace to="/dashboard" />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </PageWrapper>

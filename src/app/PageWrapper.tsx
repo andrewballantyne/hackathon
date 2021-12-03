@@ -31,7 +31,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
   const headerToolbar = (
     <Toolbar id="toolbar">
       <ToolbarContent>
-        <ToolbarItem>header-tools</ToolbarItem>
+        <ToolbarItem>Hackathon By: Andrew Ballantyne and Christian Vogt</ToolbarItem>
       </ToolbarContent>
     </Toolbar>
   );
