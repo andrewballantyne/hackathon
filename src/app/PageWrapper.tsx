@@ -64,14 +64,14 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
         <NavItem
           id={HackathonPage.DASHBOARD}
           itemId={HackathonPage.DASHBOARD}
-          isActive={HackathonPage.DASHBOARD === navItemSelected}
+          isActive={navItemSelected.startsWith(HackathonPage.DASHBOARD)}
         >
           Dashboard
         </NavItem>
         <NavItem
           id={HackathonPage.CATALOG}
           itemId={HackathonPage.CATALOG}
-          isActive={HackathonPage.CATALOG === navItemSelected}
+          isActive={navItemSelected.startsWith(HackathonPage.CATALOG)}
         >
           Catalog
         </NavItem>
